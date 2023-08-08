@@ -1,0 +1,100 @@
+<app-vacancy-filter (filterChanged)="onFilterChanged($event)"></app-vacancy-filter>
+
+<div class="pt-16 pb-20 justify-center">
+  <h1 class="mx-auto max-w-7xl px-6 text-start text-2xl text-gray-900 dark:text-dark-gray_white font-bold pb-5">
+    Список вакансий
+  </h1>
+  <div class="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+    <div class="rounded-sm md:w-2/3 space-y-4">
+      <div
+        *ngFor="let vacancy of filteredVacancies"
+        [routerLink]="['/vacancy', vacancy.id]"
+        class="transition-all justify-between rounded-sm bg-white border-[1px] border-gray-200 dark:border-none dark:bg-dark-secondary p-5 sm:flex
+        sm:justify-start cursor-pointer hover:scale-[1.02]">
+        <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between my-auto">
+          <div class="mt-5 sm:mt-0  space-y-2">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-400">{{vacancy?.name}}</h3>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{vacancy?.title}}</h2>
+            <p class="text-sm text-gray-800 dark:text-dark_text">{{vacancy?.description.slice(0, 250)}}</p>
+            <div class="flex gap-5 flex-wrap mt-2">
+              <div class="text-xs inline-flex items-center font-bold leading-sm py-2 px-2 bg-secondary text-black rounded-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-laptop mr-2"
+                     style="vertical-align: middle; width: 16px; height: 16px; display: inline-block; line-height: 0; overflow: visible;">
+                  <rect x="3" y="3" width="18" height="12" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12" y2="18"></line>
+                </svg>
+                IT
+              </div>
+              <div class="text-xs inline-flex items-center font-bold leading-sm py-2 px-2 bg-secondary text-black rounded-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock mr-2"
+                     style="vertical-align: middle; width: 16px; height: 16px; display: inline-block; line-height: 0; overflow: visible;">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                {{vacancy?.employmentType}}
+              </div>
+              <div class="text-xs inline-flex items-center font-bold leading-sm py-2 px-2 bg-secondary text-black rounded-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  width="16"
+                  height="16"
+                  class="feather feather-activity mr-2"
+                  style="vertical-align: middle; width: 16px; height: 16px; display: inline-block; line-height: 0; overflow: visible;"
+                >
+                  <circle cx="12" cy="10" r="3"/>
+                  <path d="M12 20s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"/>
+                </svg>
+                {{vacancy?.city}}
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-0">
+            <p class="text-sm font-semibold text-gray-900 dark:text-secondary">{{ vacancy?.salary }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- Если отфильтрованных вакансий нет, выведите соответствующее сообщение -->
+      <div *ngIf="filteredVacancies.length === 0" class="transition-all justify-between mb-6 rounded-sm bg-white dark:bg-dark-secondary p-6 shadow-sm sm:flex sm:justify-start">
+        <p class="text-2xl text-gray-900 dark:text-white">Нет вакансий, удовлетворяющих выбранными вами критериям.</p>
+      </div>
+    </div>
+
+    <!-- Остальной код для отображения списка вакансий -->
+
+    <!-- Sub total -->
+    <div class="mt-6 h-full rounded-sm bg-white dark:bg-dark-secondary dark:bg-opacity-50 dark:border-none p-6 border-[0.5px] md:mt-0 md:w-1/3">
+      <div class="flex justify-between">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve" class="w-6">
+          <g id="Glyph_copy_2">
+            <path class="dark:fill-dark-primary"
+                  d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
+            <path class="dark:fill-dark-primary"
+                  d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z"/>
+          </g>
+        </svg>
+      </div>
+      <hr class="my-4"/>
+      <div class="flex justify-between">
+        <p class="text-lg text-gray-900 dark:text-dark-white_text">Подпишитесь на уведомления, чтобы быть вкурсе о каждой вакансии которая вам
+          интереса</p>
+      </div>
+      <input type="email" placeholder="Введите вашу почту"
+             class="mt-3 w-full dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-gray-100 dark:bg-black focus:ring-0 focus:outline-none text-sm"
+      >
+
+      <button class="mt-6 w-full p-2 border-[0.5px] border-primary dark:border-primary font-medium dark:bg-dark-primary  text-black rounded-sm">
+        Подписаться
+      </button>
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,95 @@
+<div class="flex flex-col">
+  <!-- Page Scroll Progress -->
+  <div class="fixed inset-x-0 top-0 z-50 h-0.5 mt-0.5 bg-lime-300"
+       [style.width]="navigationProgressService.percent + '%'">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="flex justify-around py-4 bg-white/80 dark:bg-black/75 backdrop-blur-md w-full fixed top-0 left-0 right-0 z-10 ">
+
+    <!-- Logo Container -->
+    <div class="flex items-center">
+      <!-- Logo -->
+      <a routerLink="" class="cursor-pointer flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-16" viewBox="0 0 550 351" fill="">
+          <path
+            d="M550 28.6548C550 29.0896 549.991 29.5243 549.974 29.9502C549.974 30.0833 549.956 30.2075 549.938 30.3406C549.929 30.7488 549.903 31.1392 549.85 31.5207C549.858 31.5562 549.85 31.5828 549.85 31.6006C549.805 32.0176 549.761 32.4346 549.69 32.8339C549.628 33.3131 549.548 33.7744 549.459 34.2447C549.432 34.3689 549.406 34.502 549.37 34.6351C549.184 35.5757 548.936 36.4807 548.643 37.3857C548.527 37.7673 548.403 38.1399 548.261 38.5126C548.102 38.9562 547.933 39.391 547.747 39.8169L511.927 129.371C511.918 129.416 511.891 129.451 511.873 129.495L511.11 131.421C511.11 131.456 511.093 131.474 511.075 131.483C506.949 140.817 497.952 147.525 487.304 148.395C487.287 148.404 487.278 148.404 487.26 148.395H487.242L482.628 148.404C482.611 148.412 482.602 148.412 482.575 148.404L328.053 148.448H328.027H324.549H324.531C309.518 147.543 297.628 135.094 297.628 119.851C297.628 111.51 301.186 104.004 306.865 98.7774C306.883 98.7508 306.909 98.733 306.936 98.7153L308.844 97.1181C308.852 97.1004 308.879 97.0738 308.879 97.0738L415.381 7.66148L417.572 5.82478C421.663 2.70151 426.605 0.651886 431.991 0.0840149H438.051L519.824 0.00415039H519.832H522.725C522.743 -0.00473022 522.769 0.00415039 522.787 0.00415039C537.942 0.776093 550 13.2958 550 28.6548Z"
+            class="dark:fill-dark-primary fill-[#ECECEC]"/>
+          <path
+            d="M462.958 246.235C462.958 249.713 462.345 253.04 461.21 256.128C461.05 256.563 460.873 256.997 460.695 257.432L431.477 330.483C431.477 330.501 431.468 330.51 431.468 330.51L429.897 334.476C429.88 334.52 429.862 334.556 429.844 334.591C425.621 343.207 417.218 349.409 407.254 350.518H400.75H400.732L247.594 350.553C247.577 350.562 247.568 350.553 247.568 350.553H241.588H241.57C227.16 349.054 215.945 336.871 215.945 322.08C215.945 318.771 216.504 315.576 217.551 312.613C217.551 312.586 217.56 312.568 217.577 312.542L218.429 310.412L218.438 310.386L271.117 178.029C271.117 178.011 271.125 178.011 271.125 178.011L273.157 172.918C273.157 172.9 273.166 172.882 273.166 172.882C277.505 164.497 285.854 158.517 295.677 157.497H301.684C301.701 157.488 301.719 157.497 301.719 157.497L319.172 157.488H319.19H325.073H325.082C327.859 157.772 330.521 158.446 333.005 159.466L338.249 162.288L445.771 219.909C445.771 219.909 445.798 219.909 445.806 219.926L449.684 222.012C449.702 222.012 449.71 222.02 449.71 222.02C457.687 227.131 462.958 236.075 462.958 246.235Z"
+            class="dark:fill-dark-primary fill-[#ECECEC]"/>
+          <path
+            d="M313.862 28.5212C313.862 31.9905 313.249 35.3001 312.122 38.3701C311.963 38.8049 311.794 39.2397 311.608 39.6656L194.645 332.072C194.618 332.152 194.583 332.241 194.556 332.321C194.441 332.631 194.326 332.951 194.184 333.252C194.139 333.377 194.095 333.492 194.042 333.616C190.058 342.853 181.362 349.579 170.981 350.741C170.963 350.75 170.946 350.75 170.937 350.741L164.566 350.75L31.2948 350.874H26.0243C11.4372 349.57 0 337.298 0 322.374C0 318.967 0.594507 315.702 1.68587 312.676L2.39569 310.91L119.208 18.8497C119.216 18.8142 119.234 18.7787 119.243 18.7433L119.864 17.226C123.901 7.88281 132.792 1.11279 143.351 0.0924072H288.627C302.841 1.76053 313.862 13.8543 313.862 28.5212Z"
+            class="dark:fill-dark-primary fill-[#ECECEC]"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Links Section -->
+    <div class="items-center hidden space-x-14 lg:flex">
+      <a routerLink=""
+         class="flex text-lg font-semibold dark:text-dark-primary hover:scale-105 transition-all dark:hover:text-white cursor-pointer duration-100">
+        Главная
+      </a>
+
+      <a href="http://karimov.group" target="_blank"
+         class="flex text-lg  font-semibold dark:text-dark-primary hover:scale-105 transition-all dark:hover:text-white cursor-pointer duration-100">
+        О нас
+      </a>
+    </div>
+
+    <!-- Icon Menu Section -->
+    <div class="flex items-center space-x-2 lg:hidden">
+      <button class="focus:outline-none transition-transform duration-300" (click)="toggleMobileMenu()">
+        <svg *ngIf="!isMobileMenuOpen" viewBox="0 0 24 24" fill="#000" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 transform transition-transform">
+          <path d="M3 12h18M3 6h18M3 18h18" fill="#000" stroke="#000"></path>
+        </svg>
+        <svg *ngIf="isMobileMenuOpen" viewBox="0 0 24 24" fill="none" class="w-10 h-10 transform transition-transform">
+          <path d="M18 6L6 18M6 6l12 12" fill="#000" stroke="#000"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="lg:hidden bg-dark-gray_white dark:bg-dark-primary w-full absolute top-20 left-0 right-0 z-10 px-4 py-2 transition-opacity duration-300"
+         [class.opacity-100]="isMobileMenuOpen"
+         [class.opacity-0]="!isMobileMenuOpen">
+      <a routerLink=""
+         class="block text-lg font-semibold dark:text-black text-center hover:scale-105 transition-all dark:hover:text-white cursor-pointer duration-100 mb-4">
+        Главная
+      </a>
+
+      <a href="http://karimov.group" target="_blank"
+         class="block text-lg font-semibold dark:text-black text-center hover:scale-105 transition-all dark:hover:text-white cursor-pointer duration-100">
+        О нас
+      </a>
+    </div>
+
+    <!-- Icon Menu Section -->
+    <div class="flex items-center space-x-2">
+      <button class="focus:outline-none" (click)="themeService.toggleDarkMode()">
+        <svg *ngIf="!themeService.isDarkMode" viewBox="0 0 24 24" fill="none" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10">
+          <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" class="fill-lime-300 stroke-lime-300"></path>
+          <path
+            d="M12 4v1M17.66 6.344l-.828.828M20.005 12.004h-1M17.66 17.664l-.828-.828M12 20.01V19M6.34 17.664l.835-.836M3.995 12.004h1.01M6 6l.835.836"
+            class="stroke-black"></path>
+        </svg>
+        <svg *ngIf="themeService.isDarkMode" viewBox="0 0 24 24" fill="none" class="w-10 h-10">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M17.715 15.15A6.5 6.5 0 0 1 9 6.035C6.106 6.922 4 9.645 4 12.867c0 3.94 3.153 7.136 7.042 7.136 3.101 0 5.734-2.032 6.673-4.853Z"
+                class="fill-lime-300"></path>
+          <path
+            d="m17.715 15.15.95.316a1 1 0 0 0-1.445-1.185l.495.869ZM9 6.035l.846.534a1 1 0 0 0-1.14-1.49L9 6.035Zm8.221 8.246a5.47 5.47 0 0 1-2.72.718v2a7.47 7.47 0 0 0 3.71-.98l-.99-1.738Zm-2.72.718A5.5 5.5 0 0 1 9 9.5H7a7.5 7.5 0 0 0 7.5 7.5v-2ZM9 9.5c0-1.079.31-2.082.845-2.93L8.153 5.5A7.47 7.47 0 0 0 7 9.5h2Zm-4 3.368C5 10.089 6.815 7.75 9.292 6.99L8.706 5.08C5.397 6.094 3 9.201 3 12.867h2Zm6.042 6.136C7.718 19.003 5 16.268 5 12.867H3c0 4.48 3.588 8.136 8.042 8.136v-2Zm5.725-4.17c-.81 2.433-3.074 4.17-5.725 4.17v2c3.552 0 6.553-2.327 7.622-5.537l-1.897-.632Z"
+            class="fill-lime-300"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M17 3a1 1 0 0 1 1 1 2 2 0 0 0 2 2 1 1 0 1 1 0 2 2 2 0 0 0-2 2 1 1 0 1 1-2 0 2 2 0 0 0-2-2 1 1 0 1 1 0-2 2 2 0 0 0 2-2 1 1 0 0 1 1-1Z"
+                class="fill-lime-300"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+</div>

@@ -1,0 +1,38 @@
+<div class="modal fixed inset-0 flex items-center justify-center z-50 bg-opacity-50 bg-gray-900">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg w-80">
+        <h2 class="text-2xl font-semibold mb-4">Отправить запрос</h2>
+        <form (ngSubmit)="onSubmit()" >
+            <div class="mb-4" >
+                <label for="fullName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    ФИО
+                </label>
+                <input type="text" id="fullName" name="fullName" [(ngModel)]="fullName" *ngIf="isFormValid"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-500 dark:focus:border-green-500">
+            </div>
+            <div class="mb-4">
+                <label for="phoneNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Номер телефона
+                </label>
+                <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-500 dark:focus:border-green-500">
+            </div>
+            <div class="mb-4">
+                <label for="resumeFile" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Загрузить резюме
+                </label>
+                <input type="file" id="resumeFile" name="resumeFile" (change)="onFileChange($event)"
+                       class="mt-1 block w-full">
+            </div>
+            <div class="flex justify-end">
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md">
+                    Отправить
+                </button>
+                <button type="button" (click)="closeModal()"
+                        class="ml-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md">
+                    Отмена
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

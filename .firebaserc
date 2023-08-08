@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "karimovjob-6c80d": {
+      "hosting": {
+        "karimovJob": [
+          "karimovjob-6c80d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "karimovjob-6c80d"
+  }
+}
