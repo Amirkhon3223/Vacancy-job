@@ -3,10 +3,10 @@ import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class VacancyListServiceService {
-  constructor() {
 
-  }
+export class VacancyListServiceService {
+
+  constructor() {  }
 
   private vacancies: any[] = [
     {
@@ -100,8 +100,7 @@ export class VacancyListServiceService {
       img2: '',
       img3: '',
     },
-
-    // Добавьте другие вакансии здесь
+    // Тут другие вакансии
   ];
 
   getVacancies(): any[] {
@@ -112,14 +111,5 @@ export class VacancyListServiceService {
     return this.vacancies.find(vacancy => vacancy.id === id);
   }
 
-  // constructor(private firestore: AngularFirestore) {}
-  //
-  // getVacancies(): Observable<any[]> {
-  //   return this.firestore.collection('vacancies').valueChanges();
-  // }
-  //
-  // getVacancyById(id: number): Observable<any> {
-  //   return this.firestore.doc(`vacancies/${id}`).valueChanges();
-  // }
 }
 

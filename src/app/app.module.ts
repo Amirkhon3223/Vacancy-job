@@ -19,6 +19,7 @@ import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     VacancyPageComponent,
     VacancyFilterComponent,
     RequestModalComponent,
+    PaginationComponent,
   ],
     imports: [
         BrowserModule,
