@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {VacancyListServiceService} from "../../services/vacancy-list-service.service";
 import {ActivatedRoute} from "@angular/router";
-import {RequestModalComponent} from "../request-modal/request-modal.component";
+import {RequestModalComponent} from "../../components/request-modal/request-modal.component";
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -14,26 +14,21 @@ export class VacancyPageComponent {
     vacancies: any[] = []
 
     constructor(
+      //Вызываем компоненты и сервисы
         private route: ActivatedRoute,
         private vacancyService: VacancyListServiceService,
         public dialog: MatDialog,
-    ) {
-    }
+    ) { }
 
+  // Происходит инициализация, берется список(объекты из сервиса, где хранятся данные)...
     ngOnInit(): void {
         this.vacancies = this.vacancyService.getVacancies();
         this.route.params.subscribe(params => {
             const vacancyId = +params['id']; // Получаем id вакансии из параметров URL
             this.vacancy = this.vacancyService.getVacancyById(vacancyId); // Используем сервис для получения данных вакансии по id
-            this.updateData(vacancyId);
         });
     }
 
-    updateData(vacancyId: number) {
-        if (this.vacancies?.length > 0) {
-            this.vacancy = this.vacancies.find(vacancy => vacancy.id === vacancyId);
-        }
-    }
 
     // Открытие модального окна
     openModal(vacancy: any): void {
@@ -46,13 +41,14 @@ export class VacancyPageComponent {
         data: { vacancyInfo: minimalVacancyInfo }
       });
 
-      dialogRef.afterClosed().subscribe((result: any) => {
-        if (result) {
-          alert("Ваша заявка принята! Скоро с вами свяжутся наши специалисты!");
-        } else {
-          console.log('Модальное окно было закрыто без отправки данных');
-        }
-      });
+      // После успешной или само вольной закрытии модального окна. Чисто для проверки, никакой пользы для Клиента. Просто комментировал пусть останется на всякий случае
+      // dialogRef.afterClosed().subscribe((result: any) => {
+      //   if (result) {
+      //     alert("Ваша заявка принята! Скоро с вами свяжутся наши специалисты!");
+      //   } else {
+      //     console.log('Модальное окно было закрыто');
+      //   }
+      // });
     }
 
 }

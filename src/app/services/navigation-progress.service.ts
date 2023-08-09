@@ -8,6 +8,7 @@ export class NavigationProgressService {
 
   constructor() { }
 
+  // Для красоты анимаци горизонтальной линии Над навигции
   // Метод для обновления значения прогресса скроллинга
   updateScrollProgress(scrollY: number, windowHeight: number, fullHeight: number) {
     this.percent = Math.round((scrollY / (fullHeight - windowHeight)) * 100);

@@ -6,7 +6,6 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
     styleUrls: ['./pagination.component.css']
 })
 
-
 export class PaginationComponent {
     @Input() currentPage: any;
     @Input() totalPages: any;

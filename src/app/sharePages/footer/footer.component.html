@@ -5,7 +5,7 @@
     <div class="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center md:flex-row md:flex-no-wrap ">
       <div class="flex flex-wrap flex-grow mt-10 -mb-10 text-center md:pl-20 md:mt-0 md:text-left justify-center">
         <div class="lg:w-3/12 w-full md:w-4/12 sm:w-full">
-          <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
+          <a routerLink="" class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 550 351" fill="">
               <path
                 d="M550 28.6548C550 29.0896 549.991 29.5243 549.974 29.9502C549.974 30.0833 549.956 30.2075 549.938 30.3406C549.929 30.7488 549.903 31.1392 549.85 31.5207C549.858 31.5562 549.85 31.5828 549.85 31.6006C549.805 32.0176 549.761 32.4346 549.69 32.8339C549.628 33.3131 549.548 33.7744 549.459 34.2447C549.432 34.3689 549.406 34.502 549.37 34.6351C549.184 35.5757 548.936 36.4807 548.643 37.3857C548.527 37.7673 548.403 38.1399 548.261 38.5126C548.102 38.9562 547.933 39.391 547.747 39.8169L511.927 129.371C511.918 129.416 511.891 129.451 511.873 129.495L511.11 131.421C511.11 131.456 511.093 131.474 511.075 131.483C506.949 140.817 497.952 147.525 487.304 148.395C487.287 148.404 487.278 148.404 487.26 148.395H487.242L482.628 148.404C482.611 148.412 482.602 148.412 482.575 148.404L328.053 148.448H328.027H324.549H324.531C309.518 147.543 297.628 135.094 297.628 119.851C297.628 111.51 301.186 104.004 306.865 98.7774C306.883 98.7508 306.909 98.733 306.936 98.7153L308.844 97.1181C308.852 97.1004 308.879 97.0738 308.879 97.0738L415.381 7.66148L417.572 5.82478C421.663 2.70151 426.605 0.651886 431.991 0.0840149H438.051L519.824 0.00415039H519.832H522.725C522.743 -0.00473022 522.769 0.00415039 522.787 0.00415039C537.942 0.776093 550 13.2958 550 28.6548Z"
@@ -18,8 +18,27 @@
                 class="dark:fill-dark-primary fill-[#ECECEC]"/>
             </svg>
           </a>
-          <div class="mt-4">
-          <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+        </div>
+        <div class="lg:w-3/12 w-full md:w-4/12 sm:w-full">
+          <nav class="list-none space-y-2">
+            <li>
+              <a routerLink="" class="text-gray-500 dark:text-dark-white_text cursor-pointer hover:text-gray-900 text-md" type="mail">Главная</a>
+            </li>
+            <li>
+              <a href="http://karimov.group/en" class="text-gray-500 dark:text-dark-white_text cursor-pointer hover:text-gray-900 text-md" type="phone">О нас</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-3/12 w-full md:w-4/12 sm:w-full space-y-2">
+          <nav class="list-none space-y-2">
+            <h2 class="text-sm font-medium tracking-widest text-gray-900 uppercase title-font dark:text-dark-white_text">Контакты</h2>
+            <li>
+              <a class="text-gray-500 dark:text-dark-white_text cursor-pointer hover:text-gray-900" type="mail">support@karimov.group</a>
+            </li>
+            <li>
+              <a class="text-gray-500 dark:text-dark-white_text cursor-pointer hover:text-gray-900 phone" type="phone">+992 4000-60000</a>
+            </li>
+            <span class="inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start">
             <a
               class="text-gray-500 cursor-pointer hover:text-gray-700 dark:text-dark-white_text dark:hover:text-dark-primary">
               <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -55,30 +74,9 @@
               </svg>
             </a>
           </span>
-          </div>
-        </div>
-        <div class="lg:w-3/12 w-full md:w-4/12 sm:w-full">
-          <h2
-            class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font dark:text-dark-white_text"
-            routerLink="">Главная</h2>
-          <h2
-            class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font dark:text-dark-white_text"
-            href="http://karimov.group" target="_blank">О нас</h2>
-        </div>
-        <div class="lg:w-3/12 w-full md:w-4/12 sm:w-full">
-          <h2
-            class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font dark:text-dark-white_text">
-            Контакты</h2>
-          <nav class="mb-10 list-none">
-            <li class="mt-3">
-              <a class="text-gray-500 dark:text-dark-white_text cursor-pointer hover:text-gray-900" type="mail">support@karimov.group</a>
-            </li>
-            <li class="mt-3">
-              <a class="text-gray-500 dark:text-dark-white_text cursor-pointer hover:text-gray-900 phone" type="phone">+992
-                4000-60000</a>
-            </li>
           </nav>
         </div>
+
       </div>
     </div>
 
