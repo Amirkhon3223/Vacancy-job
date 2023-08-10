@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {VacancyListServiceService} from "../../services/vacancy-list-service.service";
+import {VacancyListService} from "../../services/vacancy-list.service";
+import {Vacancy} from "../../models/vacancy";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -8,28 +9,23 @@ import {VacancyListServiceService} from "../../services/vacancy-list-service.ser
 })
 export class VacancyListComponent {
 
-  vacancies: any[] = [];
+  vacancies: Vacancy[] = [];
   totalVacancies: number = 0;
   filteredVacancies: any[] = [];  // Массив отфильтрованных вакансий
   currentPage: number = 1;  // Текущая страница
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
   constructor(
-    private vacancyService: VacancyListServiceService,
+    private vacancyService: VacancyListService,
   ) {  }
 
-  truncateDescription(description: string, maxLength: number): string {
-    if (description.length > maxLength) {
-      let truncated = description.slice(0, maxLength);
-      const lastChar = truncated[truncated.length - 1];
-      // Проверяем, является ли последний символ буквой
-      if (!/[a-zA-Z]/.test(lastChar)) {
-        truncated = truncated.slice(0, -1) // Удаляем последний символ, который не является буквой
-        truncated = truncated.replace(/\s+$/, ''); // Удаляем пробельные символы перед многоточием, если есть
-      }
-      return truncated + '...';
-    }
-    return description;
+  // Берет список вакансии из сервиса(где хранятся вакансии)
+  ngOnInit(): void {
+    this.vacancyService.getVacancies().subscribe((vacancies) => {
+      this.vacancies = vacancies;
+      this.filteredVacancies = [...this.vacancies];
+      this.totalVacancies = this.filteredVacancies.length;
+    });
   }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
@@ -51,11 +47,18 @@ export class VacancyListComponent {
     return this.filteredVacancies.slice(startIndex, endIndex);
   }
 
-  // Берет список вакансии из сервиса(где хранятся вакансии)
-  ngOnInit(): void {
-    this.vacancies = this.vacancyService.getVacancies();
-    this.filteredVacancies = [...this.vacancies]; // Изначально отфильтрованный массив будет равен всем вакансиям
-    this.totalVacancies = this.filteredVacancies.length;
+  truncateDescription(description: string, maxLength: number): string {
+    if (description.length > maxLength) {
+      let truncated = description.slice(0, maxLength);
+      const lastChar = truncated[truncated.length - 1];
+      // Проверяем, является ли последний символ буквой
+      if (!/[a-zA-Z]/.test(lastChar)) {
+        truncated = truncated.slice(0, -1) // Удаляем последний символ, который не является буквой
+        truncated = truncated.replace(/\s+$/, ''); // Удаляем пробельные символы перед многоточием, если есть
+      }
+      return truncated + '...';
+    }
+    return description;
   }
 
   // Метод, который будет вызываться при изменении данных фильтрации

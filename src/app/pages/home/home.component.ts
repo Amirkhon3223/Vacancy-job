@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, HostListener, Output, Renderer2} from '@angular/core';
-import { VacancyListServiceService } from '../../services/vacancy-list-service.service';
+import { VacancyListService } from '../../services/vacancy-list.service';
 
 @Component({
   selector: 'app-home',

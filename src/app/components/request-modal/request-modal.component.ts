@@ -10,6 +10,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RequestModalComponent {
   fullName: string = '';
+  email: string = '';
+  coverText: string = '';
   phoneNumber: string = '';
   selectedFile: File | null = null;
   vacancyInfo: string; // Информация о выбранной вакансии
@@ -27,14 +29,16 @@ export class RequestModalComponent {
 
   // Метод для проверки введенных данных перед отправкой
   isFormValid(): boolean {
-    return ![this.fullName.trim(), this.phoneNumber.trim()].some(value => !value);
+    return ![this.fullName.trim(), this.phoneNumber.trim(), this.email.trim(), this.coverText].some(value => !value);
   }
 
   onSubmit(): void {
     if (this.isFormValid()) {
       const requestData = {
         fullName: this.fullName, // Берем ИМЯ для отправки
-        phoneNumber: this.phoneNumber, // Таже Номер
+        phoneNumber: this.phoneNumber, // Также Номер
+        email: this.email, // Получения почты
+        coverText: this.coverText, // Получения сопроводительного письма
         resumeFile: this.selectedFile, // Файл резюме
         vacancyInfo: this.vacancyInfo // информация о вакансии, содержит только id, title и city
       };
@@ -43,10 +47,12 @@ export class RequestModalComponent {
       const chatId = '948069343'; // Chat ID, куда будут отправляться сообщения
       // Уже то что будет отправиться. То есть, ИМЯ, НОМЕР И СВ и данные об вакансии в виде JSON
       const textMessage = `
-            New request received:
-            Full Name: ${this.fullName}
-            Phone Number: ${this.phoneNumber}
-            Vacancy Info: ${JSON.stringify(this.vacancyInfo, null, 2)}
+            Новый запрос на вакансию:
+            ФИО: ${this.fullName}
+            Номер телефона: ${this.phoneNumber}
+            Почта: ${this.email}
+            Cопроводительное письмо: ${this.coverText}
+            На вакансию: ${JSON.stringify(this.vacancyInfo, null, 2)}
         `;
 
       // Телеграм токен
@@ -74,7 +80,7 @@ export class RequestModalComponent {
         console.error('Ошибка при отправке данных на Firebase', error);
       });
 
-      // Все успешно отправилось, закрываем модалку и проверяем логи
+      // Все успешно отправилось, закрываем мочалку и проверяем логи
       this.dialogRef.close(requestData);
       console.log(requestData)
       console.log("Данные отправились:")

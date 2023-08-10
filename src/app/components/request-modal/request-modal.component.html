@@ -24,29 +24,41 @@
           ФИО
         </label>
         <input type="text" id="fullName" name="fullName" [(ngModel)]="fullName"
-               class="mt-3 w-full rounded-sm bg-gray-100 dark:bg-black focus:ring-0 focus:outline-none custom-input">
+               class="px-8 py-3 w-full dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm">
       </div>
       <div class="mb-4">
         <label for="phoneNumber" class="block font-semibold">
           Номер телефона
         </label>
         <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber"
-               class="mt-3 w-full rounded-sm bg-gray-100 dark:bg-black focus:ring-0 focus:outline-none custom-input ">
+               class="px-8 py-3 w-full dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm">
       </div>
-      <div class="mb-4 space-y-2">
-        <span class="font-semibold">Загрузить резюме</span>
-        <label class="block px-4 py-2 font-semibold bg-secondary text-primary rounded-sm w-fit cursor-pointer">
-          Загрузить резюме
-          <input type="file" (change)="onFileChange($event)" class="hidden">
+      <div class="mb-4">
+        <label for="email" class="block font-semibold">
+          Ваша почта
         </label>
+        <input type="text" id="email" name="email" [(ngModel)]="email"
+               class="px-8 py-3 w-full dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm">
       </div>
-      <div class="flex justify-end">
+      <div class="mb-4">
+        <label for="coverText" class="block font-semibold">
+          Cопроводительное письмо
+        </label>
+        <input type="text" id="coverText" name="coverText" [(ngModel)]="coverText"
+               class="px-8 py-3 w-full dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm">
+      </div>
+      <div class="mb-4">
+        <label class="block font-semibold">Загрузить резюме</label>
+        <input type="file" (change)="onFileChange($event)"
+               class="py-3 w-full dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm">
+      </div>
+      <div class="flex justify-end space-x-2">
         <button type="submit"
-                class="px-4 py-2 font-semibold bg-secondary text-primary rounded-sm">
+                class="w-full p-2 px-3 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-sm">
           Отправить
         </button>
         <button type="button" (click)="closeModal()"
-                class="ml-2 font-semibold py-2 px-3 bg-primary text-secondary rounded-sm">
+                class="w-full p-2 px-3 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-sm">
           Отмена
         </button>
       </div>

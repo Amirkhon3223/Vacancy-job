@@ -7,7 +7,7 @@ import {NavbarComponent} from './sharePages/navbar/navbar.component';
 import {FooterComponent} from './sharePages/footer/footer.component';
 import {VacancyListComponent} from './components/vacancy-list/vacancy-list.component';
 import {VacancyPageComponent} from './pages/vacancy-page/vacancy-page.component';
-import {VacancyListServiceService} from "./services/vacancy-list-service.service";
+import {VacancyListService} from "./services/vacancy-list.service";
 import {VacancyFilterComponent} from './components/vacancy-filter/vacancy-filter.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ThemeServiceService} from "./services/theme-service.service";
@@ -52,7 +52,7 @@ import {MarkdownModule} from "ngx-markdown";
   providers: [
     HttpClientModule,
     AngularFireStorage,
-    VacancyListServiceService,
+    VacancyListService,
     ThemeServiceService
   ],
   bootstrap: [AppComponent]
