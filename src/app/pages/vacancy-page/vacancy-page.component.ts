@@ -10,9 +10,13 @@ import {Vacancy} from '../../models/vacancy'
   templateUrl: './vacancy-page.component.html',
   styleUrls: ['./vacancy-page.component.css']
 })
+
 export class VacancyPageComponent {
   vacancy: any;
   vacancies: Vacancy[] = []
+  headings: string[] = [];
+  paragraphs: string[] = [];
+  lists: string[][] = [];
 
   constructor(
     //Вызываем компоненты и сервисы
@@ -26,6 +30,20 @@ export class VacancyPageComponent {
   ngOnInit(): void {
     this.vacancyService.getVacancies().subscribe(vacancies => {
       this.vacancies = vacancies;
+
+      this.vacancies.forEach(item => {
+        this.headings = []; // Очищаем массив перед обработкой каждой вакансии
+        this.paragraphs = []; // Очищаем массив перед обработкой каждой вакансии
+        this.lists = []; // Очищаем массив перед обработкой каждой вакансии
+
+        if (item.type === 'heading') {
+          this.headings.push(item.description);
+        } else if (item.type === 'paragraph') {
+          this.paragraphs.push(item.description);
+        } else if (item.type === 'list') {
+          this.lists.push(item.description.split('\n')); // Предполагается, что пункты разделены символом новой строки
+        }
+      });
     });
     this.route.params.subscribe(params => {
       const vacancyId = +params['id'];
@@ -37,11 +55,11 @@ export class VacancyPageComponent {
 
 
   // Открытие модального окна
-  openModal(vacancy: any): void {
+  openModal(): void {
     const minimalVacancyInfo = {
-      id: vacancy.id,
-      title: vacancy.title,
-      city: vacancy.city
+      id: this.vacancy.id,
+      title: this.vacancy.title,
+      city: this.vacancy.city
     };
     const dialogRef = this.dialog.open(RequestModalComponent, {
       data: {vacancyInfo: minimalVacancyInfo}
@@ -49,11 +67,11 @@ export class VacancyPageComponent {
 
     // После успешной или само вольной закрытии модального окна. Чисто для проверки, никакой пользы для Клиента. Просто комментировал пусть останется на всякий случае
     // dialogRef.afterClosed().subscribe((result: any) => {
-    //   if (result) {
+    //   if (result){
     //     alert("Ваша заявка принята! Скоро с вами свяжутся наши специалисты!");
-    //   } else {
+    //} else {
     //     console.log('Модальное окно было закрыто');
-    //   }
+    //}
     // });
   }
 

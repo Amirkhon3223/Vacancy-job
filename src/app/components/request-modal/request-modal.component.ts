@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Output} from '@angular/core';
+import {Component,Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FirebaseService} from "../../services/firebase.service";
 import {HttpClient} from "@angular/common/http";

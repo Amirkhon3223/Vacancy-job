@@ -1,3 +1,4 @@
+
 <app-vacancy-filter (filterChanged)="onFilterChanged($event)"></app-vacancy-filter>
 
 <div class="pt-16 pb-20 justify-center">
@@ -6,65 +7,48 @@
   </h1>
 
   <div class="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-
     <!-- Vacancy list -->
     <div class="rounded-sm md:w-2/3 space-y-5">
-      <div
-        *ngFor="let vacancy of getVacanciesForCurrentPage()"
-        [routerLink]="['/vacancy', vacancy.id]"
-        class="transition-all justify-between rounded-sm bg-white border-[1px] border-gray-200 dark:border-none dark:bg-dark-secondary p-5 sm:flex
-        sm:justify-start cursor-pointer hover:scale-[1.02]">
-        <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between my-auto">
-          <div class="mt-5 sm:mt-0  space-y-2">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-400">{{vacancy?.name}}</h3>
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{vacancy?.title}}</h2>
-            <p class="text-sm text-gray-800 dark:text-dark_text">
-              {{ truncateDescription(vacancy?.description, 255) }}
-            </p>
-            <div class="flex gap-6 flex-wrap">
-              <div class="text-xs inline-flex items-center font-bold leading-sm py-2 px-2 bg-secondary text-black rounded-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-laptop mr-2"
-                     style="vertical-align: middle; width: 16px; height: 16px; display: inline-block; line-height: 0; overflow: visible;">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                </svg>
-                {{vacancy?.type}}
-              </div>
-              <div class="text-xs inline-flex items-center font-bold leading-sm py-2 px-2 bg-secondary text-black rounded-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock mr-2"
-                     style="vertical-align: middle; width: 16px; height: 16px; display: inline-block; line-height: 0; overflow: visible;">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                {{vacancy?.employmentType}}
-              </div>
-              <div class="text-xs inline-flex items-center font-bold leading-sm py-2 px-2 bg-secondary text-black rounded-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  width="16"
-                  height="16"
-                  class="feather feather-activity mr-2"
-                  style="vertical-align: middle; width: 16px; height: 16px; display: inline-block; line-height: 0; overflow: visible;"
-                >
-                  <circle cx="12" cy="10" r="3"/>
-                  <path d="M12 20s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"/>
-                </svg>
-                {{vacancy?.city}}
-              </div>
-            </div>
-          </div>
-          <div class="mt-5 sm:mt-0">
-            <p class="text-sm font-semibold text-gray-900 dark:text-secondary">{{ vacancy?.salary }}</p>
-          </div>
+      <div class="transition-all rounded-sm bg-white border-[1px] border-gray-100 dark:border-gray-900 dark:bg-dark-secondary p-5 space-y-4 w-full cursor-pointer hover:scale-[1.02]"
+           *ngFor="let vacancy of getVacanciesForCurrentPage()"
+           [routerLink]="['/vacancy', vacancy.id]"
+      >
+        <div class="flex justify-between items-center">
+          <h2 class="text-lg font-semibold">{{vacancy?.title}}</h2>
+          <button class="text-gray-400 hover:text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
         </div>
+        <div class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path fill-rule="evenodd"
+                  d="M10 2a8 8 0 100 16 8 8 0 000-16zM1 10a9 9 0 1118 0 9 9 0 01-18 0z"
+                  clip-rule="evenodd" />
+          </svg>
+          <p class="text-gray-500">{{vacancy?.city + ' : ' + vacancy?.region}}</p>
+          <a href="#" class="flex items-center space-x-1 text-blue-600">
+            <span>Посмотреть на карте</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                    d="M10 1a9 9 0 100 18 9 9 0 000-18zm1 14a1 1 0 100-2 1 1 0 000 2z"
+                    clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        <hr class="border-gray-300">
+        <p class="text-sm text-gray-800 dark:text-dark_text">
+          {{ truncateDescription(vacancy.sections[0].describe, 400)}}
+        </p>
+        <a href="#" class="text-blue-600 font-semibold">
+          <button class="mt-6 p-2 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-sm">Подробнее</button>
+        </a>
       </div>
+
       <!-- Если отфильтрованных вакансий нет, выведите соответствующее сообщение -->
       <div *ngIf="filteredVacancies.length === 0" class="transition-all justify-between mb-6 rounded-sm bg-white dark:bg-dark-secondary p-6 shadow-sm sm:flex sm:justify-start">
         <p class="text-2xl text-gray-900 dark:text-white">
@@ -74,8 +58,7 @@
       <!-- Pagination -->
       <app-pagination [currentPage]="currentPage"
                       [totalPages]="calculateTotalPages()"
-                      (pageChanged)="goToPage($event)"
-      >
+                      (pageChanged)="goToPage($event)">
       </app-pagination>
     </div>
 

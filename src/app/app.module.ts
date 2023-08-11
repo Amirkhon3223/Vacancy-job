@@ -18,9 +18,11 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/compat/storage";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {PaginationComponent} from './components/pagination/pagination.component';
 import {MarkdownModule} from "ngx-markdown";
+import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
+import { ContentListComponent } from './components/content-list/content-list.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import {MarkdownModule} from "ngx-markdown";
     VacancyFilterComponent,
     RequestModalComponent,
     PaginationComponent,
+    ContentHeadingComponent,
+    ContentListComponent,
   ],
   imports: [
     BrowserModule,

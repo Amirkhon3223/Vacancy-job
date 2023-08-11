@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Vacancy} from "../models/vacancy";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {Vacancy} from "../models/vacancy";
 })
 
 export class VacancyListService {
-  private baseUrl = 'http://localhost:3000/vacancies'; // Замените на вашу базовую URL JSON-сервера
+  private baseUrl = 'http://localhost:3000/vacancies';
 
   constructor(private http: HttpClient) {}
 

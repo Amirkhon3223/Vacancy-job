@@ -1,17 +1,15 @@
 import {Component} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
-import {Vacancy} from "../../models/vacancy";
-
+import { Vacancy } from '../../models/vacancy';
 @Component({
   selector: 'app-vacancy-list',
   templateUrl: './vacancy-list.component.html',
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent {
-
-  vacancies: Vacancy[] = [];
+  vacancies: Vacancy[] = []; // Используйте интерфейс Vacancy
   totalVacancies: number = 0;
-  filteredVacancies: any[] = [];  // Массив отфильтрованных вакансий
+  filteredVacancies: Vacancy[] = [];  // Массив отфильтрованных вакансий
   currentPage: number = 1;  // Текущая страница
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
@@ -19,12 +17,15 @@ export class VacancyListComponent {
     private vacancyService: VacancyListService,
   ) {  }
 
+
   // Берет список вакансии из сервиса(где хранятся вакансии)
   ngOnInit(): void {
     this.vacancyService.getVacancies().subscribe((vacancies) => {
       this.vacancies = vacancies;
-      this.filteredVacancies = [...this.vacancies];
+      this.filteredVacancies = [...this.vacancies]; // Сохраняем оригинальный список
       this.totalVacancies = this.filteredVacancies.length;
+
+      console.log(this.filteredVacancies);
     });
   }
 
@@ -41,13 +42,13 @@ export class VacancyListComponent {
   }
 
   // Добавляет список в конкретную страницу (опять такие для пагинации)
-  getVacanciesForCurrentPage(): any[] {
+  getVacanciesForCurrentPage(): Vacancy[]{
     const startIndex = (this.currentPage - 1) * this.vacanciesPerPage;
     const endIndex = startIndex + this.vacanciesPerPage;
     return this.filteredVacancies.slice(startIndex, endIndex);
   }
 
-  truncateDescription(description: string, maxLength: number): string {
+  truncateDescription(description: any, maxLength: number): string {
     if (description.length > maxLength) {
       let truncated = description.slice(0, maxLength);
       const lastChar = truncated[truncated.length - 1];
@@ -58,42 +59,41 @@ export class VacancyListComponent {
       }
       return truncated + '...';
     }
-    return description;
+    return description.slice(0,-1) + '...';
   }
 
   // Метод, который будет вызываться при изменении данных фильтрации
-  onFilterChanged(filterData: any): void {
-    this.applyFilter(filterData);
-  }
-
-  // Метод для применения фильтрации
   applyFilter(filterData: any): void {
-    const {searchText, selectedCity, selectedVacancyType} = filterData;
+    const { searchText, selectedCity, selectedVacancyType } = filterData;
 
     // Применяем фильтрацию по тексту
     this.filteredVacancies = this.vacancies.filter((vacancy) =>
-      vacancy.name.toLowerCase().includes(searchText.toLowerCase()) ||
-      vacancy.title.toLowerCase().includes(searchText.toLowerCase())
+        vacancy.title.toLowerCase().includes(searchText.toLowerCase())
     );
 
     // Применяем фильтрацию по городу
     if (selectedCity && selectedCity !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
-        vacancy.city.toLowerCase() === selectedCity.toLowerCase()
+          vacancy.city.toLowerCase() === selectedCity.toLowerCase()
       );
     }
 
     // Применяем фильтрацию по специализации
     if (selectedVacancyType && selectedVacancyType !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
-        vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
+          vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
       );
     }
 
     // Обновляем количество вакансий на текущей странице
     this.totalVacancies = this.filteredVacancies.length;
+    // Сбрасываем текущую страницу при применении фильтрации
+    this.currentPage = 1;
+  }
 
-    // Устанавливаем текущую страницу в 1 при применении фильтрации
+  onFilterChanged(filteredVacancies: Vacancy[]): void {
+    this.filteredVacancies = filteredVacancies;
+    this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
   }
 
