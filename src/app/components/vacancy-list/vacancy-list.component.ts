@@ -7,27 +7,16 @@ import { Vacancy } from '../../models/vacancy';
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent {
-  vacancies: Vacancy[] = []; // Используйте интерфейс Vacancy
+  vacancies: Vacancy[] = []; // интерфейс Vacancy
   totalVacancies: number = 0;
-  filteredVacancies: Vacancy[] = [];  // Массив отфильтрованных вакансий
+  filteredVacancies: Vacancy[] = [];
+  filteredVacanciesList: Vacancy[] = [];
   currentPage: number = 1;  // Текущая страница
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
   constructor(
     private vacancyService: VacancyListService,
   ) {  }
-
-
-  // Берет список вакансии из сервиса(где хранятся вакансии)
-  ngOnInit(): void {
-    this.vacancyService.getVacancies().subscribe((vacancies) => {
-      this.vacancies = vacancies;
-      this.filteredVacancies = [...this.vacancies]; // Сохраняем оригинальный список
-      this.totalVacancies = this.filteredVacancies.length;
-
-      console.log(this.filteredVacancies);
-    });
-  }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -41,10 +30,27 @@ export class VacancyListComponent {
     }
   }
 
+  // Берет список вакансии из сервиса(где хранятся вакансии)
+  ngOnInit(): void {
+    this.vacancyService.getVacancies().subscribe((vacancies) => {
+      this.vacancies = vacancies;
+      this.filteredVacancies = [...this.vacancies]; // Сохраняем оригинальный список
+      this.totalVacancies = this.filteredVacancies.length;
+
+      console.log(this.filteredVacancies);
+    });
+  }
+
   // Добавляет список в конкретную страницу (опять такие для пагинации)
-  getVacanciesForCurrentPage(): Vacancy[]{
+  getVacanciesForCurrentPage(): Vacancy[] {
     const startIndex = (this.currentPage - 1) * this.vacanciesPerPage;
     const endIndex = startIndex + this.vacanciesPerPage;
+
+    // Проверяем, что endIndex не превышает размера массива
+    if (endIndex > this.filteredVacancies.length) {
+      return this.filteredVacancies.slice(startIndex); // Без endIndex, чтобы не выходить за границы массива
+    }
+
     return this.filteredVacancies.slice(startIndex, endIndex);
   }
 
@@ -62,40 +68,45 @@ export class VacancyListComponent {
     return description.slice(0,-1) + '...';
   }
 
+  onFilterChanged(filteredVacancies: Vacancy[]): void {
+    this.filteredVacancies = filteredVacancies; // Присвоить новый массив
+    this.totalVacancies = this.filteredVacancies.length;
+    this.currentPage = 1;
+    console.log(filteredVacancies);
+  }
+
+  // Обработчик изменений фильтра по городу
+  onCityFilterChanged(selectedCity: string): void {
+    this.applyFilter({ selectedCity });
+  }
+
+  onVacancyTypeFilterChanged(selectedVacancyType: string): void {
+    this.applyFilter({ selectedVacancyType });
+  }
+
   // Метод, который будет вызываться при изменении данных фильтрации
   applyFilter(filterData: any): void {
     const { searchText, selectedCity, selectedVacancyType } = filterData;
 
-    // Применяем фильтрацию по тексту
     this.filteredVacancies = this.vacancies.filter((vacancy) =>
         vacancy.title.toLowerCase().includes(searchText.toLowerCase())
     );
 
-    // Применяем фильтрацию по городу
     if (selectedCity && selectedCity !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
           vacancy.city.toLowerCase() === selectedCity.toLowerCase()
       );
     }
 
-    // Применяем фильтрацию по специализации
     if (selectedVacancyType && selectedVacancyType !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
           vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
       );
     }
 
-    // Обновляем количество вакансий на текущей странице
-    this.totalVacancies = this.filteredVacancies.length;
-    // Сбрасываем текущую страницу при применении фильтрации
-    this.currentPage = 1;
-  }
-
-  onFilterChanged(filteredVacancies: Vacancy[]): void {
-    this.filteredVacancies = filteredVacancies;
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
+
   }
 
-  protected readonly length = length;
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Vacancy} from "../models/vacancy";
 
@@ -13,8 +13,11 @@ export class VacancyListService {
   constructor(private http: HttpClient) {}
 
   getVacancies(): Observable<Vacancy[]> {
-    return this.http.get<Vacancy[]>(this.baseUrl);
+    return this.http.get<Vacancy[]>(this.baseUrl).pipe(
+        tap(vacancies => console.log('Loaded vacancies:', vacancies))
+    );
   }
+
 
   getVacancyById(id: number): Observable<Vacancy[]> {
     return this.http.get<Vacancy[]>(`${this.baseUrl}/${id}`);

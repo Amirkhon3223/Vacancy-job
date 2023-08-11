@@ -16,7 +16,7 @@
 
             <div class="lg:w-3/12 w-full md:w-5/12 sm:w-full mt-4 md:mt-0">
                 <select class="py-3 w-full cursor-pointer dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
-                        [formControl]="selectedCityControl">
+                        [formControl]="selectedCityControl" (change)="applyFilter()">
                     <option value="all">Все города</option>
                     <option value="Худжанд">Худжанд</option>
                     <option value="Душанбе">Душанбе</option>
@@ -25,7 +25,7 @@
 
             <div class="lg:w-3/12 w-full md:w-5/12 sm:w-full mt-4 md:mt-0">
                 <select class="py-3 w-full cursor-pointer dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
-                        [formControl]="selectedVacancyTypeControl">
+                        [formControl]="selectedVacancyTypeControl" (change)="applyFilter()">
                     <option value="all">Все направления</option>
                     <option value="ИТ">ИТ и Компьютеры</option>
                     <option value="Маркетинг">Маркетинг и реклама</option>
