@@ -1,12 +1,15 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: 'app-content-heading',
-    template: `<h3 class="text-xl font-semibold mt-5">{{ title }}</h3>
-    <p class="mt-2">{{describe}}</p>
+  selector: 'app-content-heading',
+  template:
+    `
+      <h2 class="text-2xl font-semibold mt-10">{{ title }}</h2>
+      <p class="mt-2 text-primary dark:text-dark_text text-lg">{{ describe }}</p>
     `
 })
+
 export class ContentHeadingComponent {
-    @Input() title: string = '';
-    @Input() describe: string = '';
+  @Input() title: string = '';
+  @Input() describe: string = '';
 }

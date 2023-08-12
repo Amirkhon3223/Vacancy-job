@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {RequestModalComponent} from "../../components/request-modal/request-modal.component";
 import {MatDialog} from '@angular/material/dialog';
 import {Vacancy} from '../../models/vacancy'
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-vacancy-page',
@@ -23,6 +24,7 @@ export class VacancyPageComponent {
     private route: ActivatedRoute,
     private vacancyService: VacancyListService,
     public dialog: MatDialog,
+    private appComponent: AppComponent,
   ) {
   }
 
@@ -73,6 +75,15 @@ export class VacancyPageComponent {
     //     console.log('Модальное окно было закрыто');
     //}
     // });
+  }
+
+  copyVacancyLink(vacancyId: number): void {
+    const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
+    navigator.clipboard.writeText(vacancyLink).then(() => {
+      alert('Ссылка на вакансию скопирована: ' + vacancyLink);
+    }).catch((error) => {
+      console.error('Ошибка при копировании ссылки: ', error);
+    });
   }
 
 }

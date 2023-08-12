@@ -1,22 +1,23 @@
 import {Component} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
 import { Vacancy } from '../../models/vacancy';
+import {AppComponent} from "../../app.component";
+
 @Component({
   selector: 'app-vacancy-list',
   templateUrl: './vacancy-list.component.html',
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent {
+
   vacancies: Vacancy[] = []; // интерфейс Vacancy
   totalVacancies: number = 0;
   filteredVacancies: Vacancy[] = [];
-  filteredVacanciesList: Vacancy[] = [];
   currentPage: number = 1;  // Текущая страница
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
-  constructor(
-    private vacancyService: VacancyListService,
-  ) {  }
+
+  constructor(private vacancyService: VacancyListService) { }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -106,7 +107,16 @@ export class VacancyListComponent {
 
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
-
   }
+
+  copyVacancyLink(vacancyId: number): void {
+    const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
+    navigator.clipboard.writeText(vacancyLink).then(() => {
+      alert('Ссылка на вакансию скопирована: ' + vacancyLink);
+    }).catch((error) => {
+      console.error('Ошибка при копировании ссылки: ', error);
+    });
+  }
+
 
 }
