@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -23,6 +23,12 @@ import {PaginationComponent} from './components/pagination/pagination.component'
 import {MarkdownModule} from "ngx-markdown";
 import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
 import { ContentListComponent } from './components/content-list/content-list.component';
+import {HotToastModule} from "@ngneat/hot-toast";
+
+// import function to register Swiper custom elements
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
 
 @NgModule({
   declarations: [
@@ -51,6 +57,11 @@ import { ContentListComponent } from './components/content-list/content-list.com
     AngularFireStorageModule,
     NgOptimizedImage,
     ReactiveFormsModule,
+    HotToastModule.forRoot({
+      reverseOrder: true,
+      dismissible: true,
+      autoClose: true,
+    }),
     // Не забудьте добавить этот модуль
   ],
   providers: [
@@ -59,7 +70,8 @@ import { ContentListComponent } from './components/content-list/content-list.com
     VacancyListService,
     ThemeServiceService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

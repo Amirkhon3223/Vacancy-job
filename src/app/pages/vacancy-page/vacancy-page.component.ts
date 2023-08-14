@@ -5,6 +5,7 @@ import {RequestModalComponent} from "../../components/request-modal/request-moda
 import {MatDialog} from '@angular/material/dialog';
 import {Vacancy} from '../../models/vacancy'
 import {AppComponent} from "../../app.component";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-vacancy-page',
@@ -24,7 +25,7 @@ export class VacancyPageComponent {
     private route: ActivatedRoute,
     private vacancyService: VacancyListService,
     public dialog: MatDialog,
-    private appComponent: AppComponent,
+    private toast: HotToastService
   ) {
   }
 
@@ -66,23 +67,14 @@ export class VacancyPageComponent {
     const dialogRef = this.dialog.open(RequestModalComponent, {
       data: {vacancyInfo: minimalVacancyInfo}
     });
-
-    // После успешной или само вольной закрытии модального окна. Чисто для проверки, никакой пользы для Клиента. Просто комментировал пусть останется на всякий случае
-    // dialogRef.afterClosed().subscribe((result: any) => {
-    //   if (result){
-    //     alert("Ваша заявка принята! Скоро с вами свяжутся наши специалисты!");
-    //} else {
-    //     console.log('Модальное окно было закрыто');
-    //}
-    // });
   }
 
   copyVacancyLink(vacancyId: number): void {
     const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
     navigator.clipboard.writeText(vacancyLink).then(() => {
-      alert('Ссылка на вакансию скопирована: ' + vacancyLink);
+      this.toast.success('Ссылка скопирована')
     }).catch((error) => {
-      console.error('Ошибка при копировании ссылки: ', error);
+      this.toast.show("Ошибка при копировании ссылки: ", error);
     });
   }
 

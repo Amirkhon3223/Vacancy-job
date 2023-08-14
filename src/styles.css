@@ -2,11 +2,14 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+@import 'node_modules/@ngneat/hot-toast/src/styles/styles.css';
+
 
 /*  Tailwind CSS connection   */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 html, body{
   font-family: 'Nunito', 'Montserrat', Serif;

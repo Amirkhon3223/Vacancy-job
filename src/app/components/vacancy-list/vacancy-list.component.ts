@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
 import { Vacancy } from '../../models/vacancy';
 import {AppComponent} from "../../app.component";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -17,7 +18,7 @@ export class VacancyListComponent {
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
 
-  constructor(private vacancyService: VacancyListService) { }
+  constructor(private vacancyService: VacancyListService, private toast: HotToastService) { }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -104,19 +105,17 @@ export class VacancyListComponent {
           vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
       );
     }
-
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
   }
 
-  copyVacancyLink(vacancyId: number): void {
-    const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
-    navigator.clipboard.writeText(vacancyLink).then(() => {
-      alert('Ссылка на вакансию скопирована: ' + vacancyLink);
-    }).catch((error) => {
-      console.error('Ошибка при копировании ссылки: ', error);
-    });
-  }
-
-
+  // TOAST Text
+    copyVacancyLink(vacancyId: number): void {
+        const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
+        navigator.clipboard.writeText(vacancyLink).then(() => {
+            this.toast.success('Ссылка скопирована')
+        }).catch((error) => {
+            this.toast.show("Ошибка при копировании ссылки: ", error);
+        });
+    }
 }

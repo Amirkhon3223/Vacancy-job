@@ -9,14 +9,6 @@ import {Comments} from "../../models/comments";
 })
 export class HomeComponent {
 
-  // comments: Comments[] = [];
-  //
-  // constructor(private vacancyService: VacancyListService) { }
-  //
-  // ngOnInit(): void {
-  //   this.vacancyService.getComments().subscribe((comments) => {
-  //     this.comments = comments;
-  //   })
-  // }
+
 
 }

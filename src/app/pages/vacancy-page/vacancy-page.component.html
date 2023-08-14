@@ -2,7 +2,7 @@
   <main class="py-5 px-4 sm:p-6 md:py-10 md:px-8">
     <div class="max-w-7xl mx-auto">
 
-      <div *ngIf="vacancy" class="border-[1px] border-gray-200 dark:border-none rounded-md p-6 space-y-4">
+      <div *ngIf="vacancy" class="border-[1px] border-gray-200 dark:border-none rounded-md lg:p-10 sm:p-1 space-y-4 dark:bg-primary">
         <div class="flex justify-between items-center">
           <h2 class="text-lg font-semibold">Вакансия: {{vacancy?.title}}</h2>
           <button class="text-gray-400 hover:text-gray-600"  (click)="copyVacancyLink(vacancy.id)">
@@ -36,9 +36,9 @@
           Отправить запрос
         </button>
 
-        <hr class="border-gray-300">
+        <hr class="border-gray-300 dark:border-gray-900">
 
-        <div class="pt-3 space-y-5">
+        <div class="">
           <ng-container *ngFor="let section of vacancy.sections; let isFirst = first">
             <ng-container [ngSwitch]="section.type">
               <app-content-heading *ngSwitchCase="'heading'" [describe]="section.describe" [title]="section.title"></app-content-heading>
