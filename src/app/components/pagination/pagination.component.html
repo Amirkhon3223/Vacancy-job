@@ -15,7 +15,7 @@
         </li>
         <li class="px-[6px]" *ngFor="let page of getPages()">
             <a href="javascript:void(0)"
-               class="w-9 h-9 flex items-center justify-center rounded-sm bg-secondary text-primary text-base dark:bg-primary hover:border-primary hover:text-white hover:scale-[1.1] transition"
+               class="w-9 h-9 flex items-center justify-center rounded-sm bg-secondary text-primary text-base dark:bg-primary hover:border-primary hover:scale-[1.1] transition"
                [class.dark:bg-primary]="page === currentPage"
                [class.dark:text-secondary]="page === currentPage"
                (click)="onPageClick(page)"

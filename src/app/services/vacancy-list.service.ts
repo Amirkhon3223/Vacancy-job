@@ -15,15 +15,11 @@ export class VacancyListService {
   constructor(private http: HttpClient) {}
 
   getVacancies(): Observable<Vacancy[]> {
-    return this.http.get<Vacancy[]>(this.baseUrl).pipe(
-        tap(vacancies => console.log('Loaded vacancies:', vacancies))
-    );
+    return this.http.get<Vacancy[]>(this.baseUrl).pipe();
   }
 
   getComments(): Observable<Comments[]> {
-    return this.http.get<Comments[]>(this.CommentUrl).pipe(
-      tap(comments => console.log('Loaded comments:', comments))
-    );
+    return this.http.get<Comments[]>(this.CommentUrl).pipe();
   }
 
 

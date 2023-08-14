@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
-import { Vacancy } from '../../models/vacancy';
-import {AppComponent} from "../../app.component";
+import {Vacancy} from '../../models/vacancy';
 import {HotToastService} from "@ngneat/hot-toast";
+import {EmailService} from "../../services/email.service";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -17,8 +17,12 @@ export class VacancyListComponent {
   currentPage: number = 1;  // Текущая страница
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
-
-  constructor(private vacancyService: VacancyListService, private toast: HotToastService) { }
+  constructor(
+    private vacancyService: VacancyListService,
+    private toast: HotToastService,
+    private emailService: EmailService
+  ) {
+  }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -38,8 +42,6 @@ export class VacancyListComponent {
       this.vacancies = vacancies;
       this.filteredVacancies = [...this.vacancies]; // Сохраняем оригинальный список
       this.totalVacancies = this.filteredVacancies.length;
-
-      console.log(this.filteredVacancies);
     });
   }
 
@@ -67,42 +69,41 @@ export class VacancyListComponent {
       }
       return truncated + '...';
     }
-    return description.slice(0,-1) + '...';
+    return description.slice(0, -1) + '...';
   }
 
   onFilterChanged(filteredVacancies: Vacancy[]): void {
     this.filteredVacancies = filteredVacancies; // Присвоить новый массив
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
-    console.log(filteredVacancies);
   }
 
   // Обработчик изменений фильтра по городу
   onCityFilterChanged(selectedCity: string): void {
-    this.applyFilter({ selectedCity });
+    this.applyFilter({selectedCity});
   }
 
   onVacancyTypeFilterChanged(selectedVacancyType: string): void {
-    this.applyFilter({ selectedVacancyType });
+    this.applyFilter({selectedVacancyType});
   }
 
   // Метод, который будет вызываться при изменении данных фильтрации
   applyFilter(filterData: any): void {
-    const { searchText, selectedCity, selectedVacancyType } = filterData;
+    const {searchText, selectedCity, selectedVacancyType} = filterData;
 
     this.filteredVacancies = this.vacancies.filter((vacancy) =>
-        vacancy.title.toLowerCase().includes(searchText.toLowerCase())
+      vacancy.title.toLowerCase().includes(searchText.toLowerCase())
     );
 
     if (selectedCity && selectedCity !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
-          vacancy.city.toLowerCase() === selectedCity.toLowerCase()
+        vacancy.city.toLowerCase() === selectedCity.toLowerCase()
       );
     }
 
     if (selectedVacancyType && selectedVacancyType !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
-          vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
+        vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
       );
     }
     this.totalVacancies = this.filteredVacancies.length;
@@ -110,12 +111,26 @@ export class VacancyListComponent {
   }
 
   // TOAST Text
-    copyVacancyLink(vacancyId: number): void {
-        const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
-        navigator.clipboard.writeText(vacancyLink).then(() => {
-            this.toast.success('Ссылка скопирована')
-        }).catch((error) => {
-            this.toast.show("Ошибка при копировании ссылки: ", error);
-        });
-    }
+  copyVacancyLink(vacancyId: number): void {
+    const vacancyLink = `${window.location.origin}/vacancy/${vacancyId}`;
+    navigator.clipboard.writeText(vacancyLink).then(() => {
+      this.toast.success('Ссылка скопирована')
+    }).catch((error) => {
+      this.toast.show("Ошибка при копировании ссылки: ", error);
+    });
+  }
+
+  // Метод для оформления подписки
+  userEmail: string = ''; // Переменная для хранения введенной почты
+  subscribe(email: string): void {
+    this.emailService.subscribe(email).subscribe(
+      () => {
+        this.toast.success("Подписка успешно оформлена!")
+      },
+      (error) => {
+        this.toast.warning('Произошла ошибка при оформлении подписки')
+      }
+    );
+  }
+
 }

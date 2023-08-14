@@ -1,7 +1,8 @@
-import {Component,Inject} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FirebaseService} from "../../services/firebase.service";
 import {HttpClient} from "@angular/common/http";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-request-modal',
@@ -18,6 +19,7 @@ export class RequestModalComponent {
 
   // Внедряем MatDialogRef и MAT_DIALOG_DATA в конструктор
   constructor(
+    private toast: HotToastService,
     private http: HttpClient, // Для подключения Тeлеграма через HTTPS
     public dialogRef: MatDialogRef<RequestModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -60,7 +62,6 @@ export class RequestModalComponent {
         chat_id: chatId, // ИД чата к которому отправится эти данные...
         text: textMessage // Говорим, что данные которые уже взял сверху отправим в виде текста
       }).subscribe(response => {
-        console.log('Message sent to Telegram:', response);
 
         // Отправка файла
         if (this.selectedFile) {
@@ -69,23 +70,15 @@ export class RequestModalComponent {
           formData.append('document', this.selectedFile as Blob, this.selectedFile?.name);
           this.http.post(`https://api.telegram.org/bot${telegramBotToken}/sendDocument`, formData)
             .subscribe(fileResponse => {
-              console.log('File sent to Telegram:', fileResponse);
             });
         }
       });
 
-      this.firebaseService.sendDataToFirebase(requestData).then(() => {
-        console.log('Данные успешно отправлены на Firebase');
-      }).catch(error => {
-        console.error('Ошибка при отправке данных на Firebase', error);
-      });
-
       // Все успешно отправилось, закрываем мочалку и проверяем логи
+      this.toast.success("Запрос успешно отправлен!")
       this.dialogRef.close(requestData);
-      console.log(requestData)
-      console.log("Данные отправились:")
     } else {
-      alert("Ошибка заполнения.\nЗаполните все формы!")
+      this.toast.warning("Ошибка заполнения.\nЗаполните все формы!")
     }
   }
 
