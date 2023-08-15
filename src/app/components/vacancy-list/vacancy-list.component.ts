@@ -21,8 +21,7 @@ export class VacancyListComponent {
     private vacancyService: VacancyListService,
     private toast: HotToastService,
     private emailService: EmailService
-  ) {
-  }
+  ) {  }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -33,6 +32,7 @@ export class VacancyListComponent {
   goToPage(pageNumber: number): void {
     if (pageNumber >= 1 && pageNumber <= this.calculateTotalPages()) {
       this.currentPage = pageNumber;
+      window.scrollTo({ top: 500, behavior: 'smooth' }); // Прокручиваем страницу вверх
     }
   }
 

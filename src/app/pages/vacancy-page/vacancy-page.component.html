@@ -19,16 +19,9 @@
           <svg width="2" height="2" aria-hidden="true" fill="currentColor" class="mx-3 text-slate-300">
             <circle cx="1" cy="1" r="1" />
           </svg>
-          <a href="https://goo.gl/maps/G4sCzYXCGSx783K58" target="_blank" class="flex items-center space-x-1 text-gray-500 dark:text-secondary mt-1">
-            <span>Посмотреть на карте</span>
-            <svg viewBox="0 0 24 24" class="w-6 h-8 stroke-gray-500 dark:stroke-black dark:fill-secondary" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
-              <path d="M21 9.42999V7C21 5.93913 20.5786 4.92172 19.8284 4.17157C19.0783 3.42142 18.0609 3 17 3H7C5.93913 3 4.92178 3.42142 4.17163 4.17157C3.42149 4.92172 3 5.93913 3 7V17C3 18.0609 3.42149 19.0783 4.17163 19.8284C4.92178 20.5786 5.93913 21 7 21H12.46"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M14.4003 10.2201L3.82031 4.57007"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M4.58008 20.18L10.9001 8.34998"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M18.5 12C17.9087 11.9987 17.3229 12.1142 16.7764 12.3399C16.2298 12.5655 15.7333 12.8969 15.3151 13.3151C14.897 13.7332 14.5656 14.2298 14.3399 14.7764C14.1142 15.3229 13.9987 15.9087 14 16.5C14 19.5 17.38 22 18.5 22C19.62 22 23 19.55 23 16.5C23 15.3065 22.5259 14.1619 21.682 13.318C20.8381 12.4741 19.6935 12 18.5 12V12Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M18.5 16.9999C18.3677 16.9994 18.2369 16.9726 18.115 16.9211C17.9931 16.8696 17.8827 16.7944 17.7901 16.7C17.6053 16.5137 17.5011 16.2623 17.5 15.9999C17.4993 15.8683 17.5245 15.7379 17.5743 15.616C17.6241 15.4942 17.6974 15.3834 17.7901 15.2899C17.883 15.1962 17.9936 15.1218 18.1155 15.071C18.2374 15.0203 18.368 14.9941 18.5 14.9941C18.632 14.9941 18.7627 15.0203 18.8846 15.071C19.0065 15.1218 19.1171 15.1962 19.21 15.2899C19.3027 15.3834 19.376 15.4942 19.4258 15.616C19.4756 15.7379 19.5008 15.8683 19.5 15.9999C19.4989 16.2623 19.3948 16.5137 19.21 16.7C19.1174 16.7944 19.007 16.8696 18.8851 16.9211C18.7632 16.9726 18.6323 16.9994 18.5 16.9999Z"></path> </g>
-            </svg>
-          </a>
+            <p class="flex items-center space-x-1 text-gray-500 dark:text-secondary">
+              <span>Категория: {{vacancy?.type}}</span>
+            </p>
         </div>
 
         <button (click)="openModal()"
@@ -46,6 +39,12 @@
             </ng-container>
           </ng-container>
         </div>
+
+        <h2 class="text-lg font-medium mt-10">Заинтересовались? Отправьте запрос мы обязательно с вами свяжемся!</h2>
+        <button (click)="openModal()"
+                class="py-3 px-4 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-sm">
+          Отправить запрос
+        </button>
 
       </div>
 
