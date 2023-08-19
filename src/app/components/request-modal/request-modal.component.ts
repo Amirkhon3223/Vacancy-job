@@ -1,6 +1,5 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FirebaseService} from "../../services/firebase.service";
 import {HttpClient} from "@angular/common/http";
 import {HotToastService} from "@ngneat/hot-toast";
 
@@ -24,14 +23,13 @@ export class RequestModalComponent {
     public dialogRef: MatDialogRef<RequestModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     // Внедрение сервис в конструктор
-    private firebaseService: FirebaseService,
   ) {
     this.vacancyInfo = data.vacancyInfo;
   }
 
   // Метод для проверки введенных данных перед отправкой
   isFormValid(): boolean {
-    return ![this.fullName.trim(), this.phoneNumber.trim(), this.email.trim(), this.coverText].some(value => !value);
+    return ![this.fullName.trim(), this.phoneNumber, this.email.trim(), this.coverText].some(value => !value);
   }
 
   onSubmit(): void {

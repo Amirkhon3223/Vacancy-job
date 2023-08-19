@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Vacancy} from "../models/vacancy";
 import {Comments} from "../models/comments";

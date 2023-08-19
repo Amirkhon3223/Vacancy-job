@@ -14,10 +14,6 @@ import {ThemeServiceService} from "./services/theme-service.service";
 import {RequestModalComponent} from './components/request-modal/request-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import {environment} from "../environments/environment";
-import {AngularFireModule} from "@angular/fire/compat";
-import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {HttpClientModule} from "@angular/common/http";
 import {PaginationComponent} from './components/pagination/pagination.component';
 import {MarkdownModule} from "ngx-markdown";
@@ -52,9 +48,6 @@ register();
     MarkdownModule.forRoot(),
     HttpClientModule,
     CommonModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
     NgOptimizedImage,
     ReactiveFormsModule,
     HotToastModule.forRoot({
@@ -66,7 +59,6 @@ register();
   ],
   providers: [
     HttpClientModule,
-    AngularFireStorage,
     VacancyListService,
     ThemeServiceService
   ],
