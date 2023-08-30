@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { VacancyListService } from '../../services/vacancy-list.service';
-import {Comments} from "../../models/comments";
 
 @Component({
   selector: 'app-home',

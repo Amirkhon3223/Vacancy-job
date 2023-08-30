@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Vacancy} from "../models/vacancy";
-import {Comments} from "../models/comments";
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +9,21 @@ import {Comments} from "../models/comments";
 
 export class VacancyListService {
   private baseUrl = 'http://localhost:3000/vacancies';
-  private CommentUrl = 'http://localhost:3000/comments';
 
   constructor(private http: HttpClient) {}
 
   getVacancies(): Observable<Vacancy[]> {
-    return this.http.get<Vacancy[]>(this.baseUrl).pipe();
+    return this.http.get<Vacancy[]>(this.baseUrl).pipe(
+      catchError(error => {
+        console.error('An error occurred:', error);
+        return throwError(error);
+      })
+    );
   }
-
-  getComments(): Observable<Comments[]> {
-    return this.http.get<Comments[]>(this.CommentUrl).pipe();
-  }
-
 
   getVacancyById(id: number): Observable<Vacancy[]> {
     return this.http.get<Vacancy[]>(`${this.baseUrl}/${id}`);
   }
+
 }
 

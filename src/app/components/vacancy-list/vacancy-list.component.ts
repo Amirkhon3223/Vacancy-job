@@ -21,7 +21,7 @@ export class VacancyListComponent {
     private vacancyService: VacancyListService,
     private toast: HotToastService,
     private emailService: EmailService
-  ) {  }
+  ) { }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
