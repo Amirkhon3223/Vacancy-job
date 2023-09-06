@@ -4,7 +4,6 @@ import {ActivatedRoute} from "@angular/router";
 import {RequestModalComponent} from "../../components/request-modal/request-modal.component";
 import {MatDialog} from '@angular/material/dialog';
 import {Vacancy} from '../../models/vacancy'
-import {AppComponent} from "../../app.component";
 import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({

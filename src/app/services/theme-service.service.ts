@@ -5,6 +5,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 })
 
 export class ThemeServiceService {
+
   private storageKey = 'isDarkMode';
   public isDarkMode: boolean = true;
 
@@ -22,4 +23,5 @@ export class ThemeServiceService {
     localStorage.setItem(this.storageKey, JSON.stringify(this.isDarkMode));
     this.themeChanged.emit(this.isDarkMode);
   }
+
 }
