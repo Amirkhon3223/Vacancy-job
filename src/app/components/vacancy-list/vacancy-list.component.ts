@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
 import {Vacancy} from '../../models/vacancy';
 import {HotToastService} from "@ngneat/hot-toast";
 import {EmailService} from "../../services/email.service";
+import {VacancyFilterComponent} from "../vacancy-filter/vacancy-filter.component";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -10,18 +12,25 @@ import {EmailService} from "../../services/email.service";
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent {
-
   vacancies: Vacancy[] = []; // интерфейс Vacancy
   totalVacancies: number = 0;
   filteredVacancies: Vacancy[] = [];
   currentPage: number = 1;  // Текущая страница
   vacanciesPerPage: number = 5; // Количество вакансий на странице
 
+  selectedCityControl = new FormControl('all');
+  selectedVacancyTypeControl = new FormControl('all');
+  @Output() vacancyTypeFilterChanged = new EventEmitter<any>();
+  @Output() cityFilterChanged = new EventEmitter<any>();
+
+  @Output() filterChanged = new EventEmitter<any>();
+
   constructor(
     private vacancyService: VacancyListService,
     private toast: HotToastService,
     private emailService: EmailService
-  ) { }
+  ) {
+  }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -32,7 +41,7 @@ export class VacancyListComponent {
   goToPage(pageNumber: number): void {
     if (pageNumber >= 1 && pageNumber <= this.calculateTotalPages()) {
       this.currentPage = pageNumber;
-      window.scrollTo({ top: 500, behavior: 'smooth' }); // Прокручиваем страницу вверх
+      window.scrollTo({top: 500, behavior: 'smooth'}); // Прокручиваем страницу вверх
     }
   }
 
@@ -58,7 +67,7 @@ export class VacancyListComponent {
     return this.filteredVacancies.slice(startIndex, endIndex);
   }
 
-  truncateDescription(description: any, maxLength: number): string {
+  truncateDescription(description: string, maxLength: number): string {
     if (description.length > maxLength) {
       let truncated = description.slice(0, maxLength);
       const lastChar = truncated[truncated.length - 1];
@@ -89,6 +98,7 @@ export class VacancyListComponent {
 
   // Метод, который будет вызываться при изменении данных фильтрации
   applyFilter(filterData: any): void {
+
     const {searchText, selectedCity, selectedVacancyType} = filterData;
 
     this.filteredVacancies = this.vacancies.filter((vacancy) =>
@@ -103,9 +113,11 @@ export class VacancyListComponent {
 
     if (selectedVacancyType && selectedVacancyType !== 'all') {
       this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
-        vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
+        vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase(),
       );
     }
+
+    this.filterChanged.emit(filterData);
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
   }
@@ -133,4 +145,7 @@ export class VacancyListComponent {
     );
   }
 
+  protected readonly event = event;
+  protected readonly getSelection = getSelection;
+  protected readonly unescape = unescape;
 }

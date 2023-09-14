@@ -1,52 +1,17 @@
-<div class="pt-1 md:pt-10 lg:pt-1 md:px-5">
-  <div
-    class="max-w-7xl p-4 md:p-5 rounded-sm bg-white dark:bg-dark-secondary border-[1px] dark:border-dark-primary dark:border-opacity-20 mx-4 md:mx-auto">
-
-    <div class="md:flex-row items-center">
-      <p class="font-medium my-auto relative -top-1 md:top-0 md:right-1 md:mr-2">
-        Фильтры
-      </p>
-    </div>
-
-    <div class="flex flex-col md:flex-row items-center md:space-x-5 mt-2 md:mt-4">
-      <div class="relative lg:w-6/12 w-full md:w-5/12 sm:w-full">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-current text-gray-400 dark:text-secondary">
-            <path
-              d="M15.5 14h-.8l-.3-.3c1.2-1.4 1.9-3.1 1.9-5 0-4.4-3.6-8-8-8s-8 3.6-8 8 3.6 8 8 8c1.9 0 3.6-.7 5-1.9l.3.3v.8l5 5 1.5-1.5-5-5zm-7 0c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z"/>
-          </svg>
-        </span>
-        <input
-          type="text"
-          placeholder="Поиск по списку, локации или типа работы..."
-          class="pl-10 pr-8 py-3 w-full dark:border-gray-600 focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
-          (change)="applyFilter()" [formControl]="searchText"
-        />
-      </div>
-
-
-      <div class="lg:w-3/12 w-full md:w-5/12 sm:w-full mt-4 md:mt-0">
-        <select
-          class="py-3 w-full cursor-pointer dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
-          [formControl]="selectedCityControl" (change)="applyFilter()">
-          <option value="all">Все города</option>
-          <option value="Худжанд">Худжанд</option>
-          <option value="Душанбе">Душанбе</option>
-        </select>
-      </div>
-
-      <div class="lg:w-3/12 w-full md:w-5/12 sm:w-full mt-4 md:mt-0">
-        <select
-          class="py-3 w-full cursor-pointer dark:border-gray-600  focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
-          [formControl]="selectedVacancyTypeControl" (change)="applyFilter()">
-          <option value="all">Все направления</option>
-          <option value="ИТ">ИТ</option>
-          <option value="Маркетинг">Маркетинг</option>
-          <option value="Дизайн">Дизайн</option>
-          <option value="Другие">Другие</option>
-        </select>
-      </div>
-    </div>
-
+<div class="max-w-7xl md:mx-auto">
+  <div class="flex items-center md:space-x-5 mt-2 md:mt-4 rounded-2xl focus:dark:border-none bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm">
+    <input
+      type="text"
+      placeholder="Поиск по списку, локации или типа работы..."
+      class="px-6 w-full dark:border-none focus:dark:border-none bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
+      (change)="applyFilter()" [formControl]="searchText"
+    />
+    <button>
+      <svg xmlns="http://www.w3.org/2000/svg" width="164" height="77" viewBox="0 0 164 77" fill="none">
+        <rect width="164" height="77" rx="15" fill="#CCFF00"/>
+        <path d="M74.2438 22.5047C68.5594 24.3375 65 29.2516 65 35.2547C65 39.1859 66.1688 42.0812 68.825 44.7375C71.4813 47.3937 74.3766 48.5625 78.2547 48.5625C80.7516 48.5625 81.9203 48.3234 84.125 47.3406L85.5859 46.6766L90.2344 51.3516L94.9094 56H96.1844C97.2203 56 97.5922 55.8672 98.2297 55.2297C98.8672 54.5922 99 54.2203 99 53.1844V51.9094L94.3516 47.2344L89.6766 42.5859L90.3406 41.125C91.3234 38.9203 91.5625 37.7516 91.5625 35.2547C91.5625 31.3766 90.3938 28.4812 87.7375 25.825C85.0547 23.1422 82.1594 22 78.175 22.0266C76.6078 22.0266 75.2266 22.1859 74.2438 22.5047ZM81.9203 26.3031C83.6469 26.9406 85.9047 28.9594 86.8344 30.6859C88.9063 34.5109 88.1891 39.1859 85.0016 42.2141C80.9375 46.1453 74.9344 45.9328 71.1094 41.7359C69.4094 39.8766 68.6391 37.8844 68.6391 35.2812C68.6391 32.6516 69.3828 30.7125 71.1359 28.7734C73.9516 25.7187 77.9359 24.8156 81.9203 26.3031Z" fill="black"/>
+      </svg>
+    </button>
   </div>
 </div>
+

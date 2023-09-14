@@ -27,5 +27,6 @@ export class NavbarComponent {
     const fullHeight = document.documentElement.scrollHeight;
     this.navigationProgressService.updateScrollProgress(scrollY, windowHeight, fullHeight);
   }
+
   protected readonly HostListener = HostListener;
 }

@@ -1,56 +1,101 @@
 <app-vacancy-filter (filterChanged)="applyFilter($event)"></app-vacancy-filter>
 
 <div class="pt-16 pb-20 justify-center">
-  <h1 class="mx-auto max-w-7xl text-start text-2xl text-gray-900 dark:text-dark-gray_white font-bold pb-5">
-    Список вакансий
-  </h1>
 
   <div class="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+    <!-- Sub total -->
+    <div class="md:w-1/3 space-y-5">
+      <select
+        [formControl]="selectedCityControl" (change)="applyFilter"
+        class="py-6 px-5 w-full cursor-pointer dark:border-none focus:dark:border-none rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm font-light"
+      >
+        <option value="all">Все города</option>
+        <option value="Худжанд">Худжанд</option>
+        <option value="Душанбе">Душанбе</option>
+      </select>
+      <select
+        [formControl]="selectedVacancyTypeControl" (change)="applyFilter"
+        class="py-6 px-5 w-full cursor-pointer dark:border-none focus:dark:border-none rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm font-light"
+      >
+        <option value="all">Все направления</option>
+        <option value="ИТ">ИТ</option>
+        <option value="Маркетинг">Маркетинг</option>
+        <option value="Дизайн">Дизайн</option>
+        <option value="Другие">Другие</option>
+      </select>
+
+      <div class="md:mt-0 p-6 rounded-xl bg-white dark:bg-dark-secondary dark:border-none">
+        <p class="text-md text-white font-light dark:text-dark-white_text">
+          Подпишитесь на уведомления, чтобы быть в курсе о каждой вакансии, которая вам интересна
+        </p>
+        <div class="relative flex items-center py-3">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 -top-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve"
+                 class="w-6 items-center mt-3">
+              <g id="Glyph_copy_2">
+              <path class="fill-white"
+                    d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
+              <path class="fill-white"
+                    d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z"/>
+            </g>
+            </svg>
+          </span>
+          <input
+            [(ngModel)]="userEmail"
+            type="email"
+            placeholder="Введите вашу почту"
+            class="pl-12 py-3 w-full dark:border-dark-primary focus:dark:border-dark-primary rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
+          />
+        </div>
+
+        <button
+          (click)="subscribe(userEmail)"
+          class="w-full p-2 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-xl"
+        >
+          Подписаться
+        </button>
+      </div>
+    </div>
+
     <!-- Vacancy list -->
-    <div class="rounded-sm md:w-2/3 space-y-5">
+    <div class="rounded-xl md:w-2/3 space-y-5">
       <div
-        class="transition-all rounded-sm bg-white border-[1px] border-gray-100 dark:border-gray-900 dark:bg-dark-secondary p-5 space-y-4 w-full"
+        class="transition-all rounded-xl bg-white dark:bg-dark-secondary p-5 space-y-5 w-full"
         *ngFor="let vacancy of getVacanciesForCurrentPage()">
         <div class="flex justify-between items-center">
           <h2 class="text-2xl font-semibold cursor-pointer"
               [routerLink]="['/vacancy', vacancy.id]">{{vacancy?.title}}</h2>
           <button class="text-gray-400 hover:text-gray-600" (click)="copyVacancyLink(vacancy.id)">
-            <svg class="w-6 h-8 dark:fill-secondary" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier"> <g> <g> <path
-                d="M418.056,162.056c-30.616,0-57.736,14.712-74.88,37.384L184.512,118.6c2.136-7.872,3.376-16.104,3.376-24.656 C187.888,42.064,145.824,0,93.944,0S0,42.064,0,93.944c0,51.88,42.064,93.944,93.944,93.944c31.912,0,60.056-15.944,77.04-40.264 l157.44,80.216c-2.792,8.888-4.304,18.344-4.304,28.16c0,9.816,1.512,19.272,4.304,28.16l-157.44,80.224 c-16.976-24.32-45.128-40.272-77.04-40.272C42.064,324.112,0,366.176,0,418.056S42.064,512,93.944,512 s93.944-42.064,93.944-93.944c0-8.544-1.24-16.784-3.376-24.648l158.664-80.848c17.152,22.672,44.264,37.384,74.88,37.384 C469.936,349.944,512,307.88,512,256C512,204.112,469.936,162.056,418.056,162.056z M93.944,155.888 C59.784,155.888,32,128.096,32,93.944C32,59.784,59.784,32,93.944,32c34.152,0,61.944,27.784,61.944,61.944 C155.888,128.096,128.096,155.888,93.944,155.888z M93.944,480C59.784,480,32,452.216,32,418.056 c0-34.152,27.792-61.944,61.944-61.944c34.152,0,61.944,27.792,61.944,61.944C155.888,452.216,128.096,480,93.944,480z M418.056,317.944c-34.152,0-61.944-27.792-61.944-61.944c0-34.16,27.792-61.944,61.944-61.944 C452.216,194.056,480,221.84,480,256C480,290.152,452.216,317.944,418.056,317.944z"></path> </g> </g> </g></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 22 24" fill="none">
+              <path
+                d="M15.8662 0.350178C14.9767 0.749571 14.0689 1.74805 13.7785 2.63761C13.6514 3.0007 13.5969 3.81764 13.6332 4.43488L13.7059 5.56045L10.4381 7.50295C7.53341 9.26391 7.17033 9.4273 6.89802 9.19129C6.31708 8.66482 4.97367 8.17466 4.0478 8.17466C2.79516 8.17466 1.34282 8.91898 0.634804 9.95377C0.199102 10.5529 0.0720223 10.9704 0.0175596 11.8781C-0.0732117 13.2578 0.180948 14.1656 0.943426 15.0007C2.50469 16.7979 5.19152 16.925 6.93433 15.2911L7.44264 14.8191L10.4744 16.3804L13.5062 17.9598L13.6151 19.2851C13.724 20.7192 14.0145 21.4273 14.8133 22.1897C15.5394 22.8796 16.5198 23.2427 17.6816 23.2427C20.1143 23.2427 21.7482 21.6088 21.7663 19.1943C21.7663 16.7253 20.1506 15.0914 17.7179 15.0733C16.5379 15.0733 15.7754 15.3456 14.9222 16.0536L14.3413 16.5438L11.255 14.9825L8.15066 13.4394V12.3683C8.15066 11.7692 8.11435 11.1883 8.05989 11.043C8.00543 10.8978 9.11283 10.1353 11.2369 8.86452L14.5046 6.92201L15.3216 7.48479C15.9933 7.9568 16.3564 8.08388 17.3004 8.13835C18.6983 8.22912 19.5878 7.97496 20.4411 7.21248C22.1657 5.68752 22.2202 2.61946 20.5682 1.05819C19.4244 0.00524712 17.3367 -0.321529 15.8662 0.350178Z"
+                fill="#CCFF00"/>
+            </svg>
           </button>
         </div>
         <div class="flex items-center space-x-2">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round" class="mr-1 text-slate-400 dark:stroke-secondary" aria-hidden="true">
-            <path d="M18 11.034C18 14.897 12 19 12 19s-6-4.103-6-7.966C6 7.655 8.819 5 12 5s6 2.655 6 6.034Z"/>
-            <path d="M14 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="25" viewBox="0 0 18 25" fill="none">
+            <path
+              d="M5.93313 0.488741C3.636 1.3574 2.01449 2.80518 0.952791 4.94788C-1.132 9.15607 0.142038 13.731 5.39263 20.8734C8.59703 25.236 8.92519 25.429 10.373 23.711C14.5232 18.8465 17.4767 13.4608 17.94 9.96682C18.3647 6.76242 16.4922 2.9017 13.6932 1.26089C11.4347 -0.071064 8.28817 -0.379923 5.93313 0.488741ZM10.6818 4.96718C12.5929 5.75863 13.7125 7.90133 13.2299 9.87031C12.9017 11.2216 12.1103 12.2253 10.8942 12.8431C9.5429 13.4994 8.4233 13.4994 7.07204 12.8431C4.33093 11.4725 3.79042 7.90133 6.02965 5.77794C7.16856 4.69693 9.19544 4.33016 10.6818 4.96718Z"
+              fill="#CCFF00"/>
           </svg>
-          <p class="text-gray-500 dark:text-dark_text">{{vacancy?.city + ' : ' + vacancy?.region}}</p>
-          <svg width="2" height="2" aria-hidden="true" fill="currentColor" class="mx-3 text-slate-300">
-            <circle cx="1" cy="1" r="1"/>
+          <p class="text-gray-500 dark:text-dark_text">{{vacancy?.city}}</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 5 5" fill="none">
+            <circle cx="2.5" cy="2.5" r="2.5" fill="white"/>
           </svg>
           <p class="flex items-center space-x-1 text-gray-500 dark:text-secondary">
-            <span>Категория: {{vacancy?.type}}</span>
+            <span>опубликовано {{vacancy?.type}}</span>
           </p>
         </div>
-        <hr class="border-gray-300">
-        <p class="text-md text-gray-800 dark:text-dark_text hover:text-black dark:hover:text-white">
-          {{ truncateDescription(vacancy.sections[0].describe, 400)}}
+        <p
+          class="text-md text-white dark:text-dark_text hover:text-black dark:hover:text-white"
+          [innerHTML]="truncateDescription(vacancy.description, 300)">
         </p>
-        <a class="text-blue-600 font-semibold">
-          <button
-            class="mt-6 p-2 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-sm hover:scale-[1.06] transition"
-            [routerLink]="['/vacancy', vacancy.id]">Подробнее
-          </button>
-        </a>
       </div>
 
       <!-- Если отфильтрованных вакансий нет, выведите соответствующее сообщение -->
       <div *ngIf="filteredVacancies.length === 0"
-           class="transition-all justify-between mb-6 rounded-sm bg-white dark:bg-dark-secondary p-6 shadow-sm sm:flex sm:justify-start">
+           class="transition-all justify-between mb-6 rounded-xl bg-white dark:bg-dark-secondary p-6 shadow-sm sm:flex sm:justify-start">
         <p class="text-2xl text-gray-900 dark:text-white">
           Нет вакансий, удовлетворяющих выбранными вами критериям.
         </p>
@@ -61,54 +106,9 @@
                       (pageChanged)="goToPage($event)">
       </app-pagination>
     </div>
-
-    <!-- Sub total -->
-    <div
-      class="mt-6 h-full rounded-sm bg-white dark:bg-dark-secondary dark:bg-opacity-50 dark:border-none p-6 border-[0.5px] md:mt-0 md:w-1/3">
-      <div class="flex justify-between">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve" class="w-6">
-          <g id="Glyph_copy_2">
-            <path class="dark:fill-dark-primary"
-                  d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
-            <path class="dark:fill-dark-primary"
-                  d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z"/>
-          </g>
-        </svg>
-      </div>
-      <hr class="my-4"/>
-      <div class="flex justify-between">
-        <p class="text-lg text-gray-900 dark:text-dark-white_text">
-          Подпишитесь на уведомления, чтобы быть в курсе о каждой вакансии, которая вам интересна
-        </p>
-      </div>
-      <div class="relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve" class="w-6 items-center mt-3">
-            <g id="Glyph_copy_2">
-            <path class="dark:fill-dark-primary"
-                  d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
-            <path class="dark:fill-dark-primary"
-                  d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z"/>
-          </g>
-          </svg>
-        </span>
-        <input
-          [(ngModel)]="userEmail"
-          type="email"
-          placeholder="Введите вашу почту"
-          class="pl-10 pr-8 py-3 mt-3 w-full dark:border-gray-600 focus:dark:border-gray-500 rounded-sm bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
-        />
-      </div>
-
-      <button
-        (click)="subscribe(userEmail)"
-        class="mt-6 w-full p-2 font-semibold bg-[#ECECEC] dark:bg-secondary text-black rounded-sm"
-      >
-        Подписаться
-      </button>
-    </div>
-
   </div>
 
 </div>
 
+<!--[formControl]="selectedCityControl" (change)="applyFilter()"-->
+<!--[formControl]="selectedVacancyTypeControl" (change)="applyFilter()"-->

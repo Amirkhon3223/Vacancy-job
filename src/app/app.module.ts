@@ -17,12 +17,10 @@ import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {PaginationComponent} from './components/pagination/pagination.component';
 import {MarkdownModule} from "ngx-markdown";
-import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
-import { ContentListComponent } from './components/content-list/content-list.component';
 import {HotToastModule} from "@ngneat/hot-toast";
 
 // import function to register Swiper custom elements
-import { register } from 'swiper/element/bundle';
+import {register} from 'swiper/element/bundle';
 // register Swiper custom elements
 register();
 
@@ -37,8 +35,6 @@ register();
     VacancyFilterComponent,
     RequestModalComponent,
     PaginationComponent,
-    ContentHeadingComponent,
-    ContentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +51,6 @@ register();
       dismissible: true,
       autoClose: true,
     }),
-    // Не забудьте добавить этот модуль
   ],
   providers: [
     HttpClientModule,

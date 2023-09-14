@@ -24,7 +24,7 @@ html, body{
 
 /* Стили для темной темы */
 .dark {
-  @apply bg-black text-white;
+  @apply bg-[#161616] text-white;
 }
 
 
