@@ -20,10 +20,8 @@ export class VacancyListService {
       })
     );
   }
-
   getVacancyById(id: number): Observable<Vacancy[]> {
     return this.http.get<Vacancy[]>(`${this.baseUrl}/${id}`);
   }
-
 }
 

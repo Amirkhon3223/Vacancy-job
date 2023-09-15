@@ -19,7 +19,7 @@ html, body{
 
 
 .light {
-  @apply bg-gray-100 text-black;
+  @apply bg-[#ECECEC] text-black;
 }
 
 /* Стили для темной темы */

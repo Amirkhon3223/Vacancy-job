@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
 import {Vacancy} from '../../models/vacancy';
 import {HotToastService} from "@ngneat/hot-toast";
 import {EmailService} from "../../services/email.service";
 import {VacancyFilterComponent} from "../vacancy-filter/vacancy-filter.component";
 import {FormControl} from "@angular/forms";
+import {debounceTime, distinctUntilChanged} from "rxjs";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -20,17 +21,13 @@ export class VacancyListComponent {
 
   selectedCityControl = new FormControl('all');
   selectedVacancyTypeControl = new FormControl('all');
-  @Output() vacancyTypeFilterChanged = new EventEmitter<any>();
-  @Output() cityFilterChanged = new EventEmitter<any>();
-
-  @Output() filterChanged = new EventEmitter<any>();
+  searchText = new FormControl('');
 
   constructor(
     private vacancyService: VacancyListService,
     private toast: HotToastService,
     private emailService: EmailService
-  ) {
-  }
+  ) { }
 
   // Считает количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -81,46 +78,58 @@ export class VacancyListComponent {
     return description.slice(0, -1) + '...';
   }
 
-  onFilterChanged(filteredVacancies: Vacancy[]): void {
-    this.filteredVacancies = filteredVacancies; // Присвоить новый массив
-    this.totalVacancies = this.filteredVacancies.length;
-    this.currentPage = 1;
-  }
-
   // Обработчик изменений фильтра по городу
-  onCityFilterChanged(selectedCity: string): void {
-    this.applyFilter({selectedCity});
+  onCityFilterChanged(event: any): void {
+    const selectedCity = event.target.value;
+    this.selectedCityControl.setValue(selectedCity); // Устанавливаем значение FormControl для города
+    this.applyFilter({selectedCity}); // Применяем фильтр после изменения города
   }
 
-  onVacancyTypeFilterChanged(selectedVacancyType: string): void {
-    this.applyFilter({selectedVacancyType});
+  onVacancyTypeFilterChanged(event: any): void {
+    const selectedVacancyType = event.target.value;
+    this.selectedVacancyTypeControl.setValue(selectedVacancyType); // Устанавливаем значение FormControl для типа вакансии
+    this.applyFilter({selectedVacancyType}); // Применяем фильтр после изменения типа вакансии
   }
 
   // Метод, который будет вызываться при изменении данных фильтрации
   applyFilter(filterData: any): void {
+    const selectedCity = this.selectedCityControl.value;
+    const selectedVacancyType = this.selectedVacancyTypeControl.value;
+    const searchText = filterData.searchText; // Используйте переданный текст поиска
 
-    const {searchText, selectedCity, selectedVacancyType} = filterData;
-
-    this.filteredVacancies = this.vacancies.filter((vacancy) =>
-      vacancy.title.toLowerCase().includes(searchText.toLowerCase())
-    );
+    let filteredByCity = this.vacancies;
+    let filteredByVacancyType = this.vacancies;
 
     if (selectedCity && selectedCity !== 'all') {
-      this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
+      filteredByCity = this.vacancies.filter((vacancy) =>
         vacancy.city.toLowerCase() === selectedCity.toLowerCase()
       );
     }
 
     if (selectedVacancyType && selectedVacancyType !== 'all') {
-      this.filteredVacancies = this.filteredVacancies.filter((vacancy) =>
-        vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase(),
+      filteredByVacancyType = this.vacancies.filter((vacancy) =>
+        vacancy.type.toLowerCase() === selectedVacancyType.toLowerCase()
       );
     }
 
-    this.filterChanged.emit(filterData);
+    if (searchText) {
+      // Фильтрация по тексту поиска
+      filteredByCity = filteredByCity.filter((vacancy) =>
+        vacancy.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    // Объединяем результаты всех фильтров
+    this.filteredVacancies = filteredByCity.filter((vacancy) =>
+      filteredByVacancyType.includes(vacancy)
+    );
+
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
   }
+
+
+
 
   // TOAST Text
   copyVacancyLink(vacancyId: number): void {

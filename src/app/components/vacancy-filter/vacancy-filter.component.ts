@@ -9,10 +9,6 @@ import {FormControl} from '@angular/forms';
 })
 export class VacancyFilterComponent {
   searchText = new FormControl('');
-  selectedCityControl = new FormControl('all');
-  selectedVacancyTypeControl = new FormControl('all');
-  @Output() vacancyTypeFilterChanged = new EventEmitter<any>();
-  @Output() cityFilterChanged = new EventEmitter<any>();
 
   @Output() filterChanged = new EventEmitter<any>();
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
@@ -34,9 +30,8 @@ export class VacancyFilterComponent {
   applyFilter(): void {
     const filterData = {
       searchText: this.searchText.value,
-      selectedCity: this.selectedCityControl.value,
-      selectedVacancyType: this.selectedVacancyTypeControl.value,
     };
+    console.log(filterData.searchText); // Check if searchText is captured
     this.filterChanged.emit(filterData);
   }
 }

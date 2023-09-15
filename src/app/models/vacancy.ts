@@ -1,8 +1,8 @@
 export interface Vacancy {
   id: number;
+  date: string;
   title: string;
   type: string;
-  region: string;
   city: string;
   employmentType: string;
   description: string;

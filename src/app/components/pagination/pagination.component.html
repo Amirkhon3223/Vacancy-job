@@ -2,7 +2,7 @@
     <ul class="flex items-center -mx-[6px]">
         <li class="px-[6px]">
             <a href="javascript:void(0)"
-               class="w-9 h-9 flex items-center justify-center rounded-sm bg-[#ECECEC] dark:bg-secondary text-primary dark:text-primary text-base hover:scale-[1.1] transition"
+               class="w-12 h-12 flex items-center justify-center rounded-lg bg-white dark:bg-secondary text-primary dark:text-primary text-base hover:scale-[1.2] transition"
                (click)="onPageClick(currentPage - 1)">
                 <span>
                     <svg width="8" height="15" viewBox="0 0 8 15" class="fill-current stroke-current">
@@ -15,13 +15,14 @@
         </li>
         <li class="px-[6px]" *ngFor="let page of getPages()">
             <a href="javascript:void(0)"
-               class="w-9 h-9 flex items-center justify-center rounded-sm bg-[#ECECEC] text-primary dark:text-primary text-base dark:bg-secondary hover:scale-[1.1] transition"
+               class="w-12 h-12 flex items-center justify-center rounded-lg bg-white text-primary dark:text-primary text-base dark:bg-secondary hover:scale-[1.2] transition"
                [class.dark:bg-primary]="page === currentPage"
                [class.dark:text-black]="page === currentPage"
                [class.dark:font-bold]="page === currentPage"
                [class.dark:text-2xl]="page === currentPage"
                (click)="onPageClick(page)"
-               [class.text-primary]="page === currentPage"
+               [class.text-secondary]="page === currentPage"
+               [class.font-bold]="page === currentPage"
                [class.bg-secondary]="page === currentPage"
             >
                 {{ page }}
@@ -29,7 +30,7 @@
         </li>
         <li class="px-[6px]">
             <a href="javascript:void(0)"
-               class="w-9 h-9 flex items-center justify-center rounded-sm bg-[#ECECEC] text-primary dark:text-primary  dark:bg-secondary text-base hover:scale-[1.1] transition"
+               class="w-12 h-12 flex items-center justify-center rounded-lg bg-white text-primary dark:text-primary  dark:bg-secondary text-base hover:scale-[1.2] transition"
                (click)="onPageClick(currentPage + 1)">
             <span>
                <svg width="8" height="15" viewBox="0 0 8 15" class="fill-current stroke-current">
