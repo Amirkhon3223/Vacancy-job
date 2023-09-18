@@ -3,6 +3,11 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {HttpClient} from "@angular/common/http";
 import {HotToastService} from "@ngneat/hot-toast";
 
+
+interface VacancyInfo {
+  title: string;
+  city: string;
+}
 @Component({
   selector: 'app-request-modal',
   templateUrl: './request-modal.component.html',
@@ -14,15 +19,15 @@ export class RequestModalComponent {
   coverText: string = '';
   phoneNumber: string = '';
   selectedFile: File | null = null;
-  vacancyInfo: string; // Информация о выбранной вакансии
+  vacancyInfo: VacancyInfo; // Информация о выбранной вакансии
+
 
   // Внедряем MatDialogRef и MAT_DIALOG_DATA в конструктор
   constructor(
     private toast: HotToastService,
-    private http: HttpClient, // Для подключения Тeлеграма через HTTPS
+    private http: HttpClient, // Для подключения через HTTPS
     public dialogRef: MatDialogRef<RequestModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    // Внедрение сервис в конструктор
+    @Inject(MAT_DIALOG_DATA) public data: { vacancyInfo: VacancyInfo },
   ) {
     this.vacancyInfo = data.vacancyInfo;
   }
@@ -40,43 +45,19 @@ export class RequestModalComponent {
         email: this.email, // Получения почты
         coverText: this.coverText, // Получения сопроводительного письма
         resumeFile: this.selectedFile, // Файл резюме
-        vacancyInfo: this.vacancyInfo // информация о вакансии, содержит только id, title и city
+        resumeFileName: this.selectedFile?.name, // Название файла
+        vacancyTitle: this.vacancyInfo.title,
+        vacancyCity: this.vacancyInfo.city
       };
 
-      const telegramBotToken = '6325488987:AAHs66FqAoyI61Gt3UFxd34p2JlIm4dYt7I';
-      const chatId = '948069343'; // Chat ID, куда будут отправляться сообщения
-      // Уже то что будет отправиться. То есть, ИМЯ, НОМЕР И СВ и данные об вакансии в виде JSON
-      const textMessage = `
-            Новый запрос на вакансию:
-            ФИО: ${this.fullName}
-            Номер телефона: ${this.phoneNumber}
-            Почта: ${this.email}
-            Cопроводительное письмо: ${this.coverText}
-            На вакансию: ${JSON.stringify(this.vacancyInfo, null, 2)}
-        `;
-
-      // Телеграм токен
-      this.http.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-        chat_id: chatId, // ИД чата к которому отправится эти данные...
-        text: textMessage // Говорим, что данные которые уже взял сверху отправим в виде текста
-      }).subscribe(response => {
-
-        // Отправка файла
-        if (this.selectedFile) {
-          const formData = new FormData();
-          formData.append('chat_id', chatId);
-          formData.append('document', this.selectedFile as Blob, this.selectedFile?.name);
-          this.http.post(`https://api.telegram.org/bot${telegramBotToken}/sendDocument`, formData)
-            .subscribe(fileResponse => {
-            });
-        }
+      this.http.post('http://localhost:3001/vacancyrq', requestData).subscribe(response => {
+        this.toast.success('Ваша заявка на данную позицию была отправлена!');
+        this.dialogRef.close(requestData);
+      }, error => {
+        this.toast.error('Ошибка при отправке запроса!');
       });
-
-      // Все успешно отправилось, закрываем мочалку и проверяем логи
-      this.toast.success("Запрос успешно отправлен!")
-      this.dialogRef.close(requestData);
     } else {
-      this.toast.warning("Ошибка заполнения.\nЗаполните все формы!")
+      this.toast.warning('Ошибка при отправке запроса! Убедитесь что все данные были заполнены');
     }
   }
 

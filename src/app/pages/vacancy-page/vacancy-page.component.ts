@@ -59,7 +59,6 @@ export class VacancyPageComponent {
   // Открытие модального окна
   openModal(): void {
     const minimalVacancyInfo = {
-      id: this.vacancy.id,
       title: this.vacancy.title,
       city: this.vacancy.city
     };

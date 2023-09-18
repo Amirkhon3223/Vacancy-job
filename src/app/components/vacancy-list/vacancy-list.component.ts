@@ -3,9 +3,7 @@ import {VacancyListService} from "../../services/vacancy-list.service";
 import {Vacancy} from '../../models/vacancy';
 import {HotToastService} from "@ngneat/hot-toast";
 import {EmailService} from "../../services/email.service";
-import {VacancyFilterComponent} from "../vacancy-filter/vacancy-filter.component";
 import {FormControl} from "@angular/forms";
-import {debounceTime, distinctUntilChanged} from "rxjs";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -55,12 +53,9 @@ export class VacancyListComponent {
   getVacanciesForCurrentPage(): Vacancy[] {
     const startIndex = (this.currentPage - 1) * this.vacanciesPerPage;
     const endIndex = startIndex + this.vacanciesPerPage;
-
-    // Проверяем, что endIndex не превышает размера массива
     if (endIndex > this.filteredVacancies.length) {
       return this.filteredVacancies.slice(startIndex); // Без endIndex, чтобы не выходить за границы массива
     }
-
     return this.filteredVacancies.slice(startIndex, endIndex);
   }
 
@@ -127,9 +122,6 @@ export class VacancyListComponent {
     this.totalVacancies = this.filteredVacancies.length;
     this.currentPage = 1;
   }
-
-
-
 
   // TOAST Text
   copyVacancyLink(vacancyId: number): void {

@@ -8,7 +8,7 @@ import {Vacancy} from "../models/vacancy";
 })
 
 export class VacancyListService {
-  private baseUrl = 'http://localhost:3000/vacancies';
+  private baseUrl = 'http://192.168.1.53:3600/';
 
   constructor(private http: HttpClient) {}
 
