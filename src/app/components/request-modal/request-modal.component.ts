@@ -44,13 +44,16 @@ export class RequestModalComponent {
         phoneNumber: this.phoneNumber, // Также Номер
         email: this.email, // Получения почты
         coverText: this.coverText, // Получения сопроводительного письма
-        resumeFile: this.selectedFile, // Файл резюме
         resumeFileName: this.selectedFile?.name, // Название файла
         vacancyTitle: this.vacancyInfo.title,
         vacancyCity: this.vacancyInfo.city
       };
 
-      this.http.post('http://localhost:3001/vacancyrq', requestData).subscribe(response => {
+      if (this.selectedFile){
+        this.uploadFile(this.selectedFile)
+      }
+
+      this.http.post('http://127.0.0.1:8000/userResponse', requestData).subscribe(response => {
         this.toast.success('Ваша заявка на данную позицию была отправлена!');
         this.dialogRef.close(requestData);
       }, error => {
@@ -72,5 +75,21 @@ export class RequestModalComponent {
     if (inputElement.files && inputElement.files.length > 0) {
       this.selectedFile = inputElement.files[0];
     }
+  }
+
+  uploadFile(file: File): void {
+    const formData = new FormData();
+    formData.append('uploaded_file', file);
+
+    this.http.post('http://127.0.0.1:8000/upload-file/', formData).subscribe(
+      (response) => {
+        // Обработка успешной загрузки файла
+        this.toast.success('Файл успешно загружен');
+      },
+      (error) => {
+        // Обработка ошибки загрузки файла
+        this.toast.error('Ошибка при загрузке файла');
+      }
+    );
   }
 }

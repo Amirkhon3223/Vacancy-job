@@ -10,19 +10,21 @@
         [formControl]="selectedCityControl" (change)="onCityFilterChanged($event)"
         class="py-6 px-5 w-full cursor-pointer dark:border-none border-none focus:dark:border-none rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm font-light"
       >
-        <option value="all">Все города</option>
+        <option selected value="all">Все города</option>
         <option value="Худжанд">Худжанд</option>
         <option value="Душанбе">Душанбе</option>
+        <option value="Панджикент">Панджикент</option>
+        <option value="Айни">Айни</option>
+        <option value="Хорог">Хорог</option>
       </select>
       <select
         [formControl]="selectedVacancyTypeControl" (change)="onVacancyTypeFilterChanged($event)"
         class="py-6 px-5 w-full cursor-pointer dark:border-none border-none focus:dark:border-none rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm font-light"
       >
-        <option value="all">Все направления</option>
+        <option selected value="all">Любые</option>
         <option value="ИТ">ИТ</option>
-        <option value="Маркетинг">Маркетинг</option>
-        <option value="Дизайн">Дизайн</option>
-        <option value="Другие">Другие</option>
+        <option value="Маркетинг">Маркетинг и реклама</option>
+        <option value="Безопасность">Безопасность</option>
       </select>
 
       <div class="md:mt-0 p-6 rounded-xl bg-white dark:bg-dark-secondary dark:border-none">
@@ -70,8 +72,10 @@
           >
             {{vacancy?.title}}
           </h2>
-          <button class="text-gray-400 hover:text-gray-600 hover:scale-150 transition" (click)="copyVacancyLink(vacancy.id)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 22 24" fill="#CCFF00" class="hover:fill-black">
+          <button class="text-gray-400 hover:text-gray-600 hover:scale-150 transition"
+                  (click)="copyVacancyLink(vacancy.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 22 24" fill="#CCFF00"
+                 class="hover:fill-black dark:hover:fill-white">
               <path
                 d="M15.8662 0.350178C14.9767 0.749571 14.0689 1.74805 13.7785 2.63761C13.6514 3.0007 13.5969 3.81764 13.6332 4.43488L13.7059 5.56045L10.4381 7.50295C7.53341 9.26391 7.17033 9.4273 6.89802 9.19129C6.31708 8.66482 4.97367 8.17466 4.0478 8.17466C2.79516 8.17466 1.34282 8.91898 0.634804 9.95377C0.199102 10.5529 0.0720223 10.9704 0.0175596 11.8781C-0.0732117 13.2578 0.180948 14.1656 0.943426 15.0007C2.50469 16.7979 5.19152 16.925 6.93433 15.2911L7.44264 14.8191L10.4744 16.3804L13.5062 17.9598L13.6151 19.2851C13.724 20.7192 14.0145 21.4273 14.8133 22.1897C15.5394 22.8796 16.5198 23.2427 17.6816 23.2427C20.1143 23.2427 21.7482 21.6088 21.7663 19.1943C21.7663 16.7253 20.1506 15.0914 17.7179 15.0733C16.5379 15.0733 15.7754 15.3456 14.9222 16.0536L14.3413 16.5438L11.255 14.9825L8.15066 13.4394V12.3683C8.15066 11.7692 8.11435 11.1883 8.05989 11.043C8.00543 10.8978 9.11283 10.1353 11.2369 8.86452L14.5046 6.92201L15.3216 7.48479C15.9933 7.9568 16.3564 8.08388 17.3004 8.13835C18.6983 8.22912 19.5878 7.97496 20.4411 7.21248C22.1657 5.68752 22.2202 2.61946 20.5682 1.05819C19.4244 0.00524712 17.3367 -0.321529 15.8662 0.350178Z"
               />
@@ -99,8 +103,8 @@
           </p>
         </div>
         <p
-          class="text-md text-primary dark:text-white hover:text-black dark:hover:text-white"
-          [innerHTML]="truncateDescription(vacancy.description, 300)">
+          class="text-md text-primary dark:text-white hover:text-black dark:hover:text-white line-clamp-2"
+          [innerHTML]="vacancy.description">
         </p>
       </div>
 
