@@ -54,7 +54,7 @@ export class VacancyListComponent {
     const startIndex = (this.currentPage - 1) * this.vacanciesPerPage;
     const endIndex = startIndex + this.vacanciesPerPage;
     if (endIndex > this.filteredVacancies.length) {
-      return this.filteredVacancies.slice(startIndex); // Без endIndex, чтобы не выходить за границы массива
+      return this.filteredVacancies.slice(startIndex); // endIndex, чтобы не выходить за границы массива
     }
     return this.filteredVacancies.slice(startIndex, endIndex);
   }

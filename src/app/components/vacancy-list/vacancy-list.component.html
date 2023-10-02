@@ -47,13 +47,13 @@
             [(ngModel)]="userEmail"
             type="email"
             placeholder="Введите вашу почту"
-            class="pl-12 py-3 w-full dark:border-dark-primary focus:dark:border-dark-primary rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none text-sm"
+            class="pl-12 py-3 w-full dark:border-black focus:dark:border-black rounded-xl bg-white dark:bg-black focus:ring-0 focus:outline-none focus:border-primary text-sm"
           />
         </div>
 
         <button
           (click)="subscribe(userEmail)"
-          class="w-full p-2 font-bold bg-secondary text-black rounded-xl"
+          class="w-full py-3 font-bold bg-secondary text-black rounded-xl"
         >
           Подписаться
         </button>
@@ -67,7 +67,7 @@
         *ngFor="let vacancy of getVacanciesForCurrentPage()" [routerLink]="['/vacancy', vacancy.id]"
       >
         <div class="flex justify-between items-center">
-          <h2 class="text-2xl font-semibold cursor-pointer"
+          <h2 class="text-2xl font-bold cursor-pointer"
               [routerLink]="['/vacancy', vacancy.id]"
           >
             {{vacancy?.title}}
@@ -110,8 +110,8 @@
 
       <!-- Если отфильтрованных вакансий нет, выведите соответствующее сообщение -->
       <div *ngIf="filteredVacancies.length === 0"
-           class="transition-all justify-between mb-6 rounded-xl bg-white dark:bg-dark-secondary p-6 shadow-sm sm:flex sm:justify-start">
-        <p class="text-2xl text-gray-900 dark:text-white">
+           class="transition-all justify-between sm:mt-10 lg:mt-0 rounded-xl bg-white dark:bg-dark-secondary p-5 shadow-sm sm:flex sm:justify-start">
+        <p class="text-lg text-gray-900 dark:text-white">
           Нет вакансий, удовлетворяющих выбранными вами критериям.
         </p>
       </div>

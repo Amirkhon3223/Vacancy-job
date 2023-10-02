@@ -83,11 +83,9 @@ export class RequestModalComponent {
 
     this.http.post('http://127.0.0.1:8000/upload-file/', formData).subscribe(
       (response) => {
-        // Обработка успешной загрузки файла
         this.toast.success('Файл успешно загружен');
       },
       (error) => {
-        // Обработка ошибки загрузки файла
         this.toast.error('Ошибка при загрузке файла');
       }
     );
