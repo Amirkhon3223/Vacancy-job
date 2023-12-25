@@ -14,10 +14,8 @@ export class PaginationComponent {
     onPageClick(pageNumber: number): void {
         this.pageChanged.emit(pageNumber);
     }
-
     getPages(): number[] {
         const pagesArray: number[] = [];
-
         // Добавляем страницы в массив до общего количества страниц
         for (let i = 1; i <= this.totalPages; i++) {
             pagesArray.push(i);

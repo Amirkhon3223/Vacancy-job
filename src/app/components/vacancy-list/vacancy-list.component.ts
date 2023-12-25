@@ -27,7 +27,7 @@ export class VacancyListComponent {
     private emailService: EmailService
   ) { }
 
-  // Считает количество вакансий и с соответствием этим создает страницу для пагинации
+  // Считаем количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
     return Math.ceil(this.filteredVacancies.length / this.vacanciesPerPage);
   }
@@ -57,20 +57,6 @@ export class VacancyListComponent {
       return this.filteredVacancies.slice(startIndex); // endIndex, чтобы не выходить за границы массива
     }
     return this.filteredVacancies.slice(startIndex, endIndex);
-  }
-
-  truncateDescription(description: string, maxLength: number): string {
-    if (description.length > maxLength) {
-      let truncated = description.slice(0, maxLength);
-      const lastChar = truncated[truncated.length - 1];
-      // Проверяем, является ли последний символ буквой
-      if (!/[a-zA-Z]/.test(lastChar)) {
-        truncated = truncated.slice(0, -1) // Удаляем последний символ, который не является буквой
-        truncated = truncated.replace(/\s+$/, ''); // Удаляем пробельные символы перед многоточием, если есть
-      }
-      return truncated + '...';
-    }
-    return description.slice(0, -1) + '...';
   }
 
   // Обработчик изменений фильтра по городу

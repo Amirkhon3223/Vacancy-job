@@ -1,18 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import 'node_modules/@ngneat/hot-toast/src/styles/styles.css';
 
 
-/*  Tailwind CSS connection   */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
 html, body{
-  font-family: 'Nunito', 'Montserrat', Serif;
+  font-family: 'Nunito', 'Montserrat', Serif, serif;
   transition: all;
   transition-delay: 2s;
 }
@@ -22,7 +20,6 @@ html, body{
   @apply bg-[#ECECEC] text-black;
 }
 
-/* Стили для темной темы */
 .dark {
   @apply bg-[#161616] text-white;
 }

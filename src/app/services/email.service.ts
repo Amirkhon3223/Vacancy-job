@@ -8,8 +8,6 @@ import {Observable} from "rxjs";
 export class EmailService {
 
   constructor(private http: HttpClient) {}
-
-  // Метод для отправки POST-запроса на сервер
   subscribe(email: string): Observable<any> {
     const url = 'http://localhost:5000/subscribe'; // URL вашего сервера
     const body = { email }; // Данные для запроса

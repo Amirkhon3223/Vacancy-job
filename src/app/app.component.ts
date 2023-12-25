@@ -7,6 +7,6 @@ import {ThemeServiceService} from "./services/theme-service.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'karimovJob';
+  title = 'Vacancy-job';
   constructor(public themeService: ThemeServiceService) {}
 }
