@@ -9,5 +9,4 @@ import {ThemeServiceService} from "./services/theme-service.service";
 export class AppComponent {
   title = 'karimovJob';
   constructor(public themeService: ThemeServiceService) {}
-
 }
