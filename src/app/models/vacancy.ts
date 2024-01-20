@@ -8,3 +8,10 @@ export interface Vacancy {
   employmentType: string;
   description: string;
 }
+
+
+export interface FilterData {
+  selectedCity?: string;
+  selectedVacancyType?: string;
+  searchText?: string;
+}

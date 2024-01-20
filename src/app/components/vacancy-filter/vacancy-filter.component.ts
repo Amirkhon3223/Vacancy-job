@@ -1,4 +1,4 @@
-import {Component, ElementRef, Output, ViewChild, EventEmitter} from '@angular/core';
+import {Component, ElementRef, Output, ViewChild, EventEmitter, AfterViewInit} from '@angular/core';
 import {debounceTime, distinctUntilChanged} from 'rxjs';
 import {FormControl} from '@angular/forms';
 
@@ -7,11 +7,9 @@ import {FormControl} from '@angular/forms';
   templateUrl: './vacancy-filter.component.html',
   styleUrls: ['./vacancy-filter.component.css']
 })
-export class VacancyFilterComponent {
+export class VacancyFilterComponent implements AfterViewInit{
   searchText = new FormControl('');
-
   @Output() filterChanged = new EventEmitter<any>();
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   constructor() {
   }
@@ -19,11 +17,12 @@ export class VacancyFilterComponent {
   ngAfterViewInit(): void {
     this.searchText.valueChanges
       .pipe(
-        debounceTime(100), // Добавляем debounceTime с задержкой 300 мс
-        distinctUntilChanged()
+        debounceTime(300),
+        distinctUntilChanged(),
       )
       .subscribe((searchText) => {
         this.applyFilter();
+        console.log(searchText)
       });
   }
 
@@ -31,7 +30,6 @@ export class VacancyFilterComponent {
     const filterData = {
       searchText: this.searchText.value,
     };
-    console.log(filterData.searchText); // Check if searchText is captured
     this.filterChanged.emit(filterData);
   }
 }

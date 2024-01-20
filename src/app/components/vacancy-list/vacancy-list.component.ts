@@ -1,6 +1,6 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {VacancyListService} from "../../services/vacancy-list.service";
-import {Vacancy} from '../../models/vacancy';
+import {FilterData, Vacancy} from '../../models/vacancy';
 import {HotToastService} from "@ngneat/hot-toast";
 import {EmailService} from "../../services/email.service";
 import {FormControl} from "@angular/forms";
@@ -11,11 +11,11 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent {
-  vacancies: Vacancy[] = []; // интерфейс Vacancy
+  vacancies: Vacancy[] = [];
   totalVacancies: number = 0;
   filteredVacancies: Vacancy[] = [];
-  currentPage: number = 1;  // Текущая страница
-  vacanciesPerPage: number = 5; // Количество вакансий на странице
+  currentPage: number = 1;
+  vacanciesPerPage: number = 5;
 
   selectedCityControl = new FormControl('all');
   selectedVacancyTypeControl = new FormControl('all');
@@ -25,7 +25,8 @@ export class VacancyListComponent {
     private vacancyService: VacancyListService,
     private toast: HotToastService,
     private emailService: EmailService
-  ) { }
+  ) {
+  }
 
   // Считаем количество вакансий и с соответствием этим создает страницу для пагинации
   calculateTotalPages(): number {
@@ -62,21 +63,21 @@ export class VacancyListComponent {
   // Обработчик изменений фильтра по городу
   onCityFilterChanged(event: any): void {
     const selectedCity = event.target.value;
-    this.selectedCityControl.setValue(selectedCity); // Устанавливаем значение FormControl для города
-    this.applyFilter({selectedCity}); // Применяем фильтр после изменения города
+    this.selectedCityControl.setValue(selectedCity);
+    this.applyFilter({selectedCity});
   }
 
   onVacancyTypeFilterChanged(event: any): void {
     const selectedVacancyType = event.target.value;
-    this.selectedVacancyTypeControl.setValue(selectedVacancyType); // Устанавливаем значение FormControl для типа вакансии
-    this.applyFilter({selectedVacancyType}); // Применяем фильтр после изменения типа вакансии
+    this.selectedVacancyTypeControl.setValue(selectedVacancyType);
+    this.applyFilter({selectedVacancyType});
   }
 
   // Метод, который будет вызываться при изменении данных фильтрации
-  applyFilter(filterData: any): void {
+  applyFilter(filterData: FilterData): void {
     const selectedCity = this.selectedCityControl.value;
     const selectedVacancyType = this.selectedVacancyTypeControl.value;
-    const searchText = filterData.searchText; // Используйте переданный текст поиска
+    const searchText = filterData.searchText;
 
     let filteredByCity = this.vacancies;
     let filteredByVacancyType = this.vacancies;
@@ -132,7 +133,4 @@ export class VacancyListComponent {
     );
   }
 
-  protected readonly event = event;
-  protected readonly getSelection = getSelection;
-  protected readonly unescape = unescape;
 }

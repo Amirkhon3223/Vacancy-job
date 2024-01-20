@@ -1,4 +1,7 @@
-<app-vacancy-filter (filterChanged)="applyFilter($event)"></app-vacancy-filter>
+<app-vacancy-filter
+  (filterChanged)="applyFilter($event)"
+>
+</app-vacancy-filter>
 
 <div class="pt-16 pb-20 justify-center">
 
@@ -37,9 +40,9 @@
                  class="w-6 items-center mt-3">
               <g id="Glyph_copy_2">
               <path class="dark:fill-white"
-                    d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
+                    d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z" />
               <path class="dark:fill-white"
-                    d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z"/>
+                    d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z" />
             </g>
             </svg>
           </span>
@@ -70,7 +73,7 @@
           <h2 class="text-2xl font-bold cursor-pointer"
               [routerLink]="['/vacancy', vacancy.id]"
           >
-            {{vacancy?.title}}
+            {{ vacancy?.title }}
           </h2>
           <button class="text-gray-400 hover:text-gray-600 hover:scale-150 transition"
                   (click)="copyVacancyLink(vacancy.id)">
@@ -86,20 +89,20 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="25" viewBox="0 0 18 25" fill="none">
             <path
               d="M5.93313 0.488741C3.636 1.3574 2.01449 2.80518 0.952791 4.94788C-1.132 9.15607 0.142038 13.731 5.39263 20.8734C8.59703 25.236 8.92519 25.429 10.373 23.711C14.5232 18.8465 17.4767 13.4608 17.94 9.96682C18.3647 6.76242 16.4922 2.9017 13.6932 1.26089C11.4347 -0.071064 8.28817 -0.379923 5.93313 0.488741ZM10.6818 4.96718C12.5929 5.75863 13.7125 7.90133 13.2299 9.87031C12.9017 11.2216 12.1103 12.2253 10.8942 12.8431C9.5429 13.4994 8.4233 13.4994 7.07204 12.8431C4.33093 11.4725 3.79042 7.90133 6.02965 5.77794C7.16856 4.69693 9.19544 4.33016 10.6818 4.96718Z"
-              fill="#CCFF00"/>
+              fill="#CCFF00" />
           </svg>
-          <p class="text-primary dark:text-dark_text">{{vacancy?.city}}</p>
+          <p class="text-primary dark:text-dark_text">{{ vacancy?.city }}</p>
           <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 5 5" fill="none">
-            <circle cx="2.5" cy="2.5" r="2.5" class="dark:fill-white fill-primary"/>
+            <circle cx="2.5" cy="2.5" r="2.5" class="dark:fill-white fill-primary" />
           </svg>
           <p class="flex items-center space-x-1 text-primary dark:text-secondary">
-            <span>{{vacancy?.type}}</span>
+            <span>{{ vacancy?.type }}</span>
           </p>
           <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 5 5" fill="none">
-            <circle cx="2.5" cy="2.5" r="2.5" class="dark:fill-white fill-primary"/>
+            <circle cx="2.5" cy="2.5" r="2.5" class="dark:fill-white fill-primary" />
           </svg>
           <p class="flex items-center space-x-1 text-primary dark:text-secondary">
-            <span>Опубликовано {{vacancy?.date}}</span>
+            <span>Опубликовано {{ vacancy?.date }}</span>
           </p>
         </div>
         <p
