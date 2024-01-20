@@ -1,5 +1,4 @@
 import {Component, HostListener} from '@angular/core';
-import {NavigationProgressService} from "../../services/navigation-progress.service";
 import {ThemeServiceService} from "../../services/theme-service.service";
 
 @Component({
@@ -9,7 +8,6 @@ import {ThemeServiceService} from "../../services/theme-service.service";
 })
 export class NavbarComponent {
   constructor(
-    public navigationProgressService: NavigationProgressService,
     public themeService: ThemeServiceService,
   ) {
   }
@@ -25,7 +23,6 @@ export class NavbarComponent {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const fullHeight = document.documentElement.scrollHeight;
-    this.navigationProgressService.updateScrollProgress(scrollY, windowHeight, fullHeight);
   }
 
   protected readonly HostListener = HostListener;

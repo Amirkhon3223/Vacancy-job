@@ -1,9 +1,11 @@
 <div id="app" [ngClass]="themeService.isDarkMode ? 'dark' : 'light'">
-<!--  Navbar-->
+  <!--  Navbar-->
   <app-navbar></app-navbar>
 
-  <!--  Router-->
-  <router-outlet></router-outlet>
+  <div class="px-3 xl:px-0 lg:px-3 md:px-5">
+    <!--  Router-->
+    <router-outlet></router-outlet>
+  </div>
 
   <!--  Footer-->
   <app-footer></app-footer>

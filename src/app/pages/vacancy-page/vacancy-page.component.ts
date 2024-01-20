@@ -14,10 +14,7 @@ import {HotToastService} from "@ngneat/hot-toast";
 
 export class VacancyPageComponent {
   vacancy: any;
-  vacancies: Vacancy[] = []
-
   constructor(
-    //Вызываем компоненты и сервисы
     private route: ActivatedRoute,
     private vacancyService: VacancyListService,
     public dialog: MatDialog,
@@ -25,7 +22,6 @@ export class VacancyPageComponent {
   ) {
   }
 
-  // Происходит инициализация, берется список(объекты из сервиса, где хранятся данные)...
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const vacancyId = +params['id'];
@@ -35,8 +31,6 @@ export class VacancyPageComponent {
     });
   }
 
-
-  // Открытие модального окна
   openModal(): void {
     const minimalVacancyInfo = {
       title: this.vacancy.title,

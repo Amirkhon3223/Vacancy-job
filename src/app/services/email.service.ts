@@ -9,7 +9,7 @@ export class EmailService {
 
   constructor(private http: HttpClient) {}
   subscribe(email: string): Observable<any> {
-    const url = 'http://localhost:5000/subscribe'; // URL вашего сервера
+    const url = 'http://localhost:5000/subscribe';
     const body = { email }; // Данные для запроса
 
     return this.http.post(url, body); // Отправка запроса на сервер

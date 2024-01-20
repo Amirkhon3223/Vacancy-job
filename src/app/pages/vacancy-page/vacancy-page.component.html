@@ -1,12 +1,14 @@
-<div class="pt-20 bg-white dark:bg-primary">
-  <main class="py-5 px-4 sm:p-6 md:py-10 md:px-8">
+<div class="pt-24 bg-white dark:bg-primary">
+  <main class="py-5 md:py-10">
     <div class="max-w-7xl mx-auto">
 
       <div *ngIf="vacancy" class="border-[1px] border-gray-200  rounded-md lg:p-10 sm:p-1 space-y-4 ">
         <div class="flex justify-between items-center">
-          <h2 class="text-lg font-semibold">Вакансия: {{ vacancy.title }}</h2>
-          <button class="text-gray-400 hover:text-gray-600 hover:scale-150 transition" (click)="copyVacancyLink(vacancy.id)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 22 24" fill="#CCFF00" class="hover:fill-black dark:hover:fill-white">
+          <h2 class="text-2xl font-bold">Вакансия: {{ vacancy.title }}</h2>
+          <button class="text-gray-400 hover:text-gray-600 hover:scale-150 transition"
+                  (click)="copyVacancyLink(vacancy.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 22 24"
+                 class="fill-gray-600 hover:fill-black dark:hover:fill-white">
               <path
                 d="M15.8662 0.350178C14.9767 0.749571 14.0689 1.74805 13.7785 2.63761C13.6514 3.0007 13.5969 3.81764 13.6332 4.43488L13.7059 5.56045L10.4381 7.50295C7.53341 9.26391 7.17033 9.4273 6.89802 9.19129C6.31708 8.66482 4.97367 8.17466 4.0478 8.17466C2.79516 8.17466 1.34282 8.91898 0.634804 9.95377C0.199102 10.5529 0.0720223 10.9704 0.0175596 11.8781C-0.0732117 13.2578 0.180948 14.1656 0.943426 15.0007C2.50469 16.7979 5.19152 16.925 6.93433 15.2911L7.44264 14.8191L10.4744 16.3804L13.5062 17.9598L13.6151 19.2851C13.724 20.7192 14.0145 21.4273 14.8133 22.1897C15.5394 22.8796 16.5198 23.2427 17.6816 23.2427C20.1143 23.2427 21.7482 21.6088 21.7663 19.1943C21.7663 16.7253 20.1506 15.0914 17.7179 15.0733C16.5379 15.0733 15.7754 15.3456 14.9222 16.0536L14.3413 16.5438L11.255 14.9825L8.15066 13.4394V12.3683C8.15066 11.7692 8.11435 11.1883 8.05989 11.043C8.00543 10.8978 9.11283 10.1353 11.2369 8.86452L14.5046 6.92201L15.3216 7.48479C15.9933 7.9568 16.3564 8.08388 17.3004 8.13835C18.6983 8.22912 19.5878 7.97496 20.4411 7.21248C22.1657 5.68752 22.2202 2.61946 20.5682 1.05819C19.4244 0.00524712 17.3367 -0.321529 15.8662 0.350178Z"
               />
@@ -15,16 +17,17 @@
         </div>
 
         <div class="flex items-center space-x-2">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400  mb-1" aria-hidden="true">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class="text-slate-800  mb-1" aria-hidden="true">
             <path d="M18 11.034C18 14.897 12 19 12 19s-6-4.103-6-7.966C6 7.655 8.819 5 12 5s6 2.655 6 6.034Z" />
             <path d="M14 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
           </svg>
-          <p class="text-gray-300">Город: {{ vacancy.city }}</p>
-          <p class="text-gray-300">Опубликован: {{ vacancy.date }}</p>
-          <svg width="2" height="2" aria-hidden="true" fill="currentColor" class="mx-3 text-slate-300">
+          <p class="text-gray-500">Город: {{ vacancy.city }}</p>
+          <p class="text-gray-500">Опубликован: {{ vacancy.date }}</p>
+          <svg width="2" height="2" aria-hidden="true" fill="currentColor" class="mx-3 text-slate-500">
             <circle cx="1" cy="1" r="1" />
           </svg>
-          <p class="flex items-center space-x-1 text-gray-300 ">
+          <p class="flex items-center space-x-1 text-gray-500 ">
             <span>Категория: {{ vacancy.type }}</span>
           </p>
         </div>
@@ -42,10 +45,11 @@
         </div>
 
         <div>
-          <h2 class="text-lg font-medium mt-10">Заинтересовались? <br> Отправьте запрос мы обязательно с вами свяжемся!</h2>
+          <h2 class="text-lg font-medium mt-10">Заинтересовались? <br> Отправьте запрос мы обязательно с вами свяжемся!
+          </h2>
           <button
             (click)="openModal()"
-            class="p-2 mt-2 px-5 font-bold bg-secondary text-black rounded-md">
+            class="p-2 mt-5 px-5 font-bold bg-secondary text-black rounded-md">
             Отправить запрос
           </button>
         </div>

@@ -19,10 +19,9 @@ export class RequestModalComponent {
   coverText: string = '';
   phoneNumber: string = '';
   selectedFile: File | null = null;
-  vacancyInfo: VacancyInfo; // Информация о выбранной вакансии
+  vacancyInfo: VacancyInfo;
 
 
-  // Внедряем MatDialogRef и MAT_DIALOG_DATA в конструктор
   constructor(
     private toast: HotToastService,
     private http: HttpClient, // Для подключения через HTTPS
@@ -40,11 +39,11 @@ export class RequestModalComponent {
   onSubmit(): void {
     if (this.isFormValid()) {
       const requestData = {
-        fullName: this.fullName, // Берем ИМЯ для отправки
-        phoneNumber: this.phoneNumber, // Также Номер
-        email: this.email, // Получения почты
-        coverText: this.coverText, // Получения сопроводительного письма
-        resumeFileName: this.selectedFile?.name, // Название файла
+        fullName: this.fullName,
+        phoneNumber: this.phoneNumber,
+        email: this.email,
+        coverText: this.coverText,
+        resumeFileName: this.selectedFile?.name,
         vacancyTitle: this.vacancyInfo.title,
         vacancyCity: this.vacancyInfo.city
       };
@@ -64,12 +63,10 @@ export class RequestModalComponent {
     }
   }
 
-  //Закрываем модалку
   closeModal(): void {
     this.dialogRef.close();
   }
 
-  // Чтобы выбранные файл юзером сохранился в переменной для отправки
   onFileChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
